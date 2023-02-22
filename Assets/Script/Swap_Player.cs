@@ -3,6 +3,7 @@ using UnityEngine;
 public class Swap_Player : MonoBehaviour
 {
     public int Shield=3;
+    public int levelUp = 3;
 
     private Vector2 fingerDownPosition;
     private Vector2 fingerUpPosition;
@@ -12,6 +13,8 @@ public class Swap_Player : MonoBehaviour
     [SerializeField]
     private float movementSpeed = 5f;
     private Rigidbody2D rb;
+
+
 
     void Start()
     {
@@ -26,7 +29,11 @@ public class Swap_Player : MonoBehaviour
             Shield = 0;
             print("Game Over");
         }
-
+        if (levelUp <= 0)
+        {
+            levelUp = 0;
+            print("Game Win");
+        }
 
 
 
@@ -113,6 +120,11 @@ public class Swap_Player : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyFollow"))
         {
             Shield -= 1;
+        }
+        if (collision.gameObject.CompareTag("Star"))
+        {
+            levelUp -= 1;
+            Destroy(collision.gameObject);
         }
     }
 }
