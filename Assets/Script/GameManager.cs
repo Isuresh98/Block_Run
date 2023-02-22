@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera_fallow : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
+    public int CoinCollectamount;
     // Start is called before the first frame update
     void Start()
     {
