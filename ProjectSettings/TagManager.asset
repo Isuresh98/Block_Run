@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Ground
   - coin
+  - GameManager
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Forground
   - Water
   - UI
   - 
@@ -42,4 +43,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Forground
+    uniqueID: 561065051
+    locked: 0
+  - name: Background
+    uniqueID: 1397892527
     locked: 0

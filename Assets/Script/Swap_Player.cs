@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class Swap_Player : MonoBehaviour
 {
+    public int Shield=3;
+
     private Vector2 fingerDownPosition;
     private Vector2 fingerUpPosition;
 
     [SerializeField]
     private float minDistanceForSwipe = 20f;
-
     [SerializeField]
     private float movementSpeed = 5f;
-
     private Rigidbody2D rb;
 
     void Start()
@@ -21,6 +21,16 @@ public class Swap_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Shield <= 0)
+        {
+            Shield = 0;
+            print("Game Over");
+        }
+
+
+
+
+
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -95,6 +105,14 @@ public class Swap_Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             rb.velocity = Vector2.zero; // Stop movement when finger is lifted off the screen
+        }
+        
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EnemyFollow"))
+        {
+            Shield -= 1;
         }
     }
 }
