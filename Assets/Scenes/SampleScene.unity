@@ -2757,18 +2757,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 616176967}
-    - target: {fileID: 3540162088285382791, guid: 111682173b2ad584fbe102c0b26feb64, type: 3}
-      propertyPath: activationDistance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3540162088285383032, guid: 111682173b2ad584fbe102c0b26feb64, type: 3}
-      propertyPath: autoRepath.mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3540162088285383032, guid: 111682173b2ad584fbe102c0b26feb64, type: 3}
-      propertyPath: autoRepath.visualizeSensitivity
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3540162088285383033, guid: 111682173b2ad584fbe102c0b26feb64, type: 3}
       propertyPath: m_Name
       value: EnemyFollow
