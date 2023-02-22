@@ -113,14 +113,15 @@ public class Swap_Player : MonoBehaviour
         {
             rb.velocity = Vector2.zero; // Stop movement when finger is lifted off the screen
         }
-        
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
         if (collision.gameObject.CompareTag("EnemyFollow"))
         {
             Shield -= 1;
         }
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
         if (collision.gameObject.CompareTag("Star"))
         {
             levelUp -= 1;
