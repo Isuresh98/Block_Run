@@ -21,7 +21,13 @@ namespace Pathfinding {
 		IAstarAI ai;
 		[SerializeField]
 		private float activationDistance;
-		void OnEnable () {
+		
+
+        private void Start()
+        {
+			target = GameObject.FindGameObjectWithTag("Player").transform;
+		}
+        void OnEnable () {
 			ai = GetComponent<IAstarAI>();
 			// Update the destination right before searching for a path as well.
 			// This is enough in theory, but this script will also update the destination every
@@ -41,18 +47,30 @@ namespace Pathfinding {
 			if (target != null && ai != null) 
 			
 			{
+
 				float distanceToTarget = Vector3.Distance(transform.position, target.position);
+				if (distanceToTarget <= activationDistance && ai.destination != target.position)
+				{
+					activationDistance = 15f;
+					ai.destination = target.position;
+				}
+
+
+				/*
+				float distanceToTarget = Vector3.Distance(transform.position, target.position);
+			
 				if (distanceToTarget <= activationDistance)
 				{
 					ai.destination = target.position;
+					
 				}
 				else
 				{
 					ai.destination = transform.position;
-				}
+				} 
+				*/
 
 			}
-			
 
 
 		}

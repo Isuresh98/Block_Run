@@ -13,12 +13,15 @@ public class Swap_Player : MonoBehaviour
     [SerializeField]
     private float movementSpeed = 5f;
     private Rigidbody2D rb;
+    private GameManager gameManager;
+    private bool End = false;
 
-
-
+    public GameState gameState = GameState.Playing;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+       
     }
 
     // Update is called once per frame
@@ -28,13 +31,29 @@ public class Swap_Player : MonoBehaviour
         {
             Shield = 0;
             print("Game Over");
+            gameState = GameState.GameOver;
         }
-        if (levelUp <= 0)
+        if (levelUp <= 0&&End)
         {
             levelUp = 0;
             print("Game Win");
+            gameState = GameState.Win;
         }
 
+        if (gameState == GameState.GameOver)
+        {
+            // Game over logic
+            rb.velocity = Vector2.zero; // Stop player movement
+            Destroy(gameObject, 2f);
+        }
+        if (gameState == GameState.Win)
+        {
+            End =true;
+            levelUp = 0;
+            rb.velocity = Vector2.zero; // Stop player movement
+            Destroy(gameObject);
+
+        }
 
 
 
@@ -127,5 +146,26 @@ public class Swap_Player : MonoBehaviour
             levelUp -= 1;
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.CompareTag("coin"))
+        {
+            gameManager.CoinCollectamount += 1;
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("End"))
+        {
+            if (levelUp == 0)
+            {
+                Destroy(collision.gameObject);
+                End = true;
+
+            }
+        }
+    }
+
+    public enum GameState
+    {
+        Playing,
+        GameOver,
+        Win
     }
 }

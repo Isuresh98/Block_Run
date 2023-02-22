@@ -9,6 +9,7 @@ TagManager:
   - GameManager
   - Star
   - EnemyFollow
+  - End
   layers:
   - Default
   - TransparentFX
