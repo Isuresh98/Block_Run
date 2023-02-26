@@ -15,18 +15,22 @@ public class Swap_Player : MonoBehaviour
     private Rigidbody2D rb;
     private GameManager gameManager;
     private bool End = false;
-
+    private bool menu;
     public GameState gameState = GameState.Playing;
+   
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        gameManager.Sheild = Shield;
         if (Shield <= 0)
         {
             Shield = 0;
@@ -36,8 +40,10 @@ public class Swap_Player : MonoBehaviour
         if (levelUp <= 0&&End)
         {
             levelUp = 0;
-            print("Game Win");
+            print("Game Win");        
             gameState = GameState.Win;
+           
+
         }
 
         if (gameState == GameState.GameOver)
@@ -45,6 +51,7 @@ public class Swap_Player : MonoBehaviour
             // Game over logic
             rb.velocity = Vector2.zero; // Stop player movement
             Destroy(gameObject, 2f);
+            gameManager.Menu(menu = false);
         }
         if (gameState == GameState.Win)
         {
@@ -52,7 +59,7 @@ public class Swap_Player : MonoBehaviour
             levelUp = 0;
             rb.velocity = Vector2.zero; // Stop player movement
             Destroy(gameObject);
-
+            gameManager.Menu(menu=true);
         }
 
 
@@ -135,6 +142,7 @@ public class Swap_Player : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyFollow"))
         {
             Shield -= 1;
+            
         }
 
     }

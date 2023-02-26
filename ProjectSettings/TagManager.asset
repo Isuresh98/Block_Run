@@ -10,6 +10,9 @@ TagManager:
   - Star
   - EnemyFollow
   - End
+  - Canvers
+  - Menu
+  - LoadUI
   layers:
   - Default
   - TransparentFX
