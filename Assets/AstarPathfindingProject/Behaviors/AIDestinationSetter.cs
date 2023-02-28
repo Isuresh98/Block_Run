@@ -2,8 +2,6 @@ using UnityEngine;
 using System.Collections;
 
 namespace Pathfinding {
-
-	
 	/// <summary>
 	/// Sets the destination of an AI to the position of a specified object.
 	/// This component should be attached to a GameObject together with a movement script such as AIPath, RichAI or AILerp.
@@ -19,15 +17,8 @@ namespace Pathfinding {
 		/// <summary>The object that the AI should move to</summary>
 		public Transform target;
 		IAstarAI ai;
-		[SerializeField]
-		private float activationDistance;
-		
 
-        private void Start()
-        {
-			target = GameObject.FindGameObjectWithTag("Player").transform;
-		}
-        void OnEnable () {
+		void OnEnable () {
 			ai = GetComponent<IAstarAI>();
 			// Update the destination right before searching for a path as well.
 			// This is enough in theory, but this script will also update the destination every
@@ -42,37 +33,7 @@ namespace Pathfinding {
 
 		/// <summary>Updates the AI's destination every frame</summary>
 		void Update () {
-
-
-			if (target != null && ai != null) 
-			
-			{
-
-				float distanceToTarget = Vector3.Distance(transform.position, target.position);
-				if (distanceToTarget <= activationDistance && ai.destination != target.position)
-				{
-					activationDistance = 15f;
-					ai.destination = target.position;
-				}
-
-
-				/*
-				float distanceToTarget = Vector3.Distance(transform.position, target.position);
-			
-				if (distanceToTarget <= activationDistance)
-				{
-					ai.destination = target.position;
-					
-				}
-				else
-				{
-					ai.destination = transform.position;
-				} 
-				*/
-
-			}
-
-
+			if (target != null && ai != null) ai.destination = target.position;
 		}
 	}
 }
