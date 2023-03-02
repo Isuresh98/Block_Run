@@ -13,6 +13,7 @@ TagManager:
   - Canvers
   - Menu
   - LoadUI
+  - dastVFX
   layers:
   - Default
   - TransparentFX

@@ -18,25 +18,33 @@ public class Swap_Player : MonoBehaviour
     private bool menu;
     public GameState gameState = GameState.Playing;
     private Animator animator;
-
-
+    private ParticleSystem particleSystem;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
 
+        particleSystem = GameObject.FindGameObjectWithTag("dastVFX").GetComponent<ParticleSystem>();
+        particleSystem.Stop();
     }
 
     // Update is called once per frame
     void Update()
     {
+       
         if (rb.velocity ==Vector2.zero)
         {
             animator.SetBool("isUp", false);
             animator.SetBool("isdoun", false);
             animator.SetBool("isLeft", false);
             animator.SetBool("isRight", false);
+           
+        }
+        else
+        {
+            particleSystem.Stop();
         }
 
 
@@ -70,8 +78,10 @@ public class Swap_Player : MonoBehaviour
             End =true;
             levelUp = 0;
             rb.velocity = Vector2.zero; // Stop player movement
+
             Destroy(gameObject);
             gameManager.Menu(menu=true);
+            
         }
 
 
@@ -168,6 +178,7 @@ public class Swap_Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            particleSystem.Play();
             rb.velocity = Vector2.zero; // Stop movement when finger is lifted off the screen
         }
         if (collision.gameObject.CompareTag("EnemyFollow"))
@@ -177,6 +188,18 @@ public class Swap_Player : MonoBehaviour
         }
 
     }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            particleSystem.Stop();
+          
+        }
+    }
+
+
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
