@@ -17,25 +17,37 @@ public class Swap_Player : MonoBehaviour
     private bool End = false;
     private bool menu;
     public GameState gameState = GameState.Playing;
-   
-    
+    private Animator animator;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        animator = GetComponent<Animator>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (rb.velocity ==Vector2.zero)
+        {
+            animator.SetBool("isUp", false);
+            animator.SetBool("isdoun", false);
+            animator.SetBool("isLeft", false);
+            animator.SetBool("isRight", false);
+        }
+
+
+
         gameManager.Sheild = Shield;
         if (Shield <= 0)
         {
             Shield = 0;
             print("Game Over");
             gameState = GameState.GameOver;
+           
         }
         if (levelUp <= 0&&End)
         {
@@ -71,7 +83,11 @@ public class Swap_Player : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 fingerDownPosition = touch.position;
-               
+                animator.SetBool("isUp", false);
+                animator.SetBool("isdoun", false);
+                animator.SetBool("isLeft", false);
+                animator.SetBool("isRight", false);
+
             }
 
             if (touch.phase == TouchPhase.Ended)
@@ -79,6 +95,7 @@ public class Swap_Player : MonoBehaviour
                 fingerUpPosition = touch.position;
                 rb.velocity = Vector2.zero; // Stop movement when finger is lifted off the screen
                 DetectSwipe();
+               
             }
         }
     }
@@ -93,10 +110,14 @@ public class Swap_Player : MonoBehaviour
                 if (direction.x > 0)
                 {
                     MoveRight();
+                    animator.SetBool("isRight", true);
                 }
                 else
                 {
                     MoveLeft();
+                   
+                    animator.SetBool("isLeft", true);
+
                 }
             }
             else
@@ -104,10 +125,14 @@ public class Swap_Player : MonoBehaviour
                 if (direction.y > 0)
                 {
                     MoveUp();
+                    animator.SetBool("isUp", true);
+
                 }
                 else
                 {
                     MoveDown();
+                    animator.SetBool("isdoun", true);
+
                 }
             }
         }
@@ -116,21 +141,27 @@ public class Swap_Player : MonoBehaviour
     void MoveRight()
     {
         rb.velocity = new Vector2(movementSpeed, 0);
+        
+
+
     }
 
     void MoveLeft()
     {
         rb.velocity = new Vector2(-movementSpeed, 0);
+
     }
 
     void MoveUp()
     {
         rb.velocity = new Vector2(0, movementSpeed);
+
     }
 
     void MoveDown()
     {
         rb.velocity = new Vector2(0, -movementSpeed);
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
