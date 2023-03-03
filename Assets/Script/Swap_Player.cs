@@ -19,7 +19,9 @@ public class Swap_Player : MonoBehaviour
     public GameState gameState = GameState.Playing;
     private Animator animator;
     private GameObject dastVFX;
-    
+    private GameObject endVFX;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,7 +29,9 @@ public class Swap_Player : MonoBehaviour
         animator = GetComponent<Animator>();
 
         dastVFX = GameObject.FindGameObjectWithTag("dastVFX");
+        endVFX = GameObject.FindGameObjectWithTag("End");
         dastVFX.SetActive(false);
+        endVFX.SetActive(false);
     }
 
     // Update is called once per frame
@@ -218,13 +222,13 @@ public class Swap_Player : MonoBehaviour
             gameManager.CoinCollectamount += 1;
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("End"))
+        if (collision.gameObject.CompareTag("EndBox"))
         {
             if (levelUp == 0)
             {
-                Destroy(collision.gameObject);
+               
                 End = true;
-
+                endVFX.SetActive(true);
             }
         }
         if (collision.gameObject.CompareTag("EnemyFollow"))
