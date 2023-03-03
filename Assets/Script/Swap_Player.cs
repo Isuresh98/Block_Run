@@ -120,13 +120,13 @@ public class Swap_Player : MonoBehaviour
                 if (direction.x > 0)
                 {
                     MoveRight();
-                    animator.SetBool("isRight", true);
+                    
                 }
                 else
                 {
                     MoveLeft();
                    
-                    animator.SetBool("isLeft", true);
+                   
 
                 }
             }
@@ -135,13 +135,13 @@ public class Swap_Player : MonoBehaviour
                 if (direction.y > 0)
                 {
                     MoveUp();
-                    animator.SetBool("isUp", true);
+                   
 
                 }
                 else
                 {
                     MoveDown();
-                    animator.SetBool("isdoun", true);
+                    
 
                 }
             }
@@ -151,7 +151,7 @@ public class Swap_Player : MonoBehaviour
     void MoveRight()
     {
         rb.velocity = new Vector2(movementSpeed, 0);
-        
+        animator.SetBool("isRight", true);
 
 
     }
@@ -159,19 +159,20 @@ public class Swap_Player : MonoBehaviour
     void MoveLeft()
     {
         rb.velocity = new Vector2(-movementSpeed, 0);
+        animator.SetBool("isLeft", true);
 
     }
 
     void MoveUp()
     {
         rb.velocity = new Vector2(0, movementSpeed);
-
+        animator.SetBool("isUp", true);
     }
 
     void MoveDown()
     {
         rb.velocity = new Vector2(0, -movementSpeed);
-
+        animator.SetBool("isdoun", true);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -180,6 +181,10 @@ public class Swap_Player : MonoBehaviour
         {
             particleSystem.Play();
             rb.velocity = Vector2.zero; // Stop movement when finger is lifted off the screen
+            animator.SetBool("isUp", false);
+            animator.SetBool("isdoun", false);
+            animator.SetBool("isLeft", false);
+            animator.SetBool("isRight", false);
         }
         if (collision.gameObject.CompareTag("EnemyFollow"))
         {
@@ -192,8 +197,11 @@ public class Swap_Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            particleSystem.Stop();
-          
+           
+            animator.SetBool("isUp", false);
+            animator.SetBool("isdoun", false);
+            animator.SetBool("isLeft", false);
+            animator.SetBool("isRight", false);
         }
     }
 
