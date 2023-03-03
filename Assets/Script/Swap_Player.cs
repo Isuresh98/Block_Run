@@ -18,7 +18,7 @@ public class Swap_Player : MonoBehaviour
     private bool menu;
     public GameState gameState = GameState.Playing;
     private Animator animator;
-    private ParticleSystem particleSystem;
+    private GameObject dastVFX;
     
     void Start()
     {
@@ -26,8 +26,8 @@ public class Swap_Player : MonoBehaviour
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
 
-        particleSystem = GameObject.FindGameObjectWithTag("dastVFX").GetComponent<ParticleSystem>();
-        particleSystem.Stop();
+        dastVFX = GameObject.FindGameObjectWithTag("dastVFX");
+        dastVFX.SetActive(false);
     }
 
     // Update is called once per frame
@@ -44,7 +44,7 @@ public class Swap_Player : MonoBehaviour
         }
         else
         {
-            particleSystem.Stop();
+            
         }
 
 
@@ -179,25 +179,22 @@ public class Swap_Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            particleSystem.Play();
+            dastVFX.SetActive(true);
             rb.velocity = Vector2.zero; // Stop movement when finger is lifted off the screen
             animator.SetBool("isUp", false);
             animator.SetBool("isdoun", false);
             animator.SetBool("isLeft", false);
             animator.SetBool("isRight", false);
         }
-        if (collision.gameObject.CompareTag("EnemyFollow"))
-        {
-            Shield -= 1;
-            
-        }
+       
 
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-           
+            dastVFX.SetActive(false);
+
             animator.SetBool("isUp", false);
             animator.SetBool("isdoun", false);
             animator.SetBool("isLeft", false);
@@ -229,6 +226,11 @@ public class Swap_Player : MonoBehaviour
                 End = true;
 
             }
+        }
+        if (collision.gameObject.CompareTag("EnemyFollow"))
+        {
+            Shield -= 1;
+
         }
     }
 
