@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinText.text = "Coin Ammount: " + CoinCollectamount.ToString();
-        SheildText.text = "Sheild: " + Sheild.ToString();
+        coinText.text =   CoinCollectamount.ToString();
+        SheildText.text =   Sheild.ToString();
     }
     public void Menu(bool menu)
     {
