@@ -7,13 +7,24 @@ public class LodingProccress : MonoBehaviour
 {
     public GameObject LoaderUI;
     public Slider progressSlider;
-    public GameObject MenuUI;
-    public GameObject MenuFUI;
+
+
+
+    [SerializeField]
+    private GameObject Winpannel;
+    [SerializeField]
+    private GameObject OverPannel;
+
+    private void Start()
+    {
+        
+        
+    }
     public void LoadScene(int index)
     {
         StartCoroutine(LoadScene_Coroutine(index));
-        MenuFUI.SetActive(false);
-        MenuUI.SetActive(false);
+        Winpannel.SetActive(false);
+        OverPannel.SetActive(false);
     }
 
     public IEnumerator LoadScene_Coroutine(int index)
@@ -43,6 +54,8 @@ public class LodingProccress : MonoBehaviour
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(sceneIndex);
+        Winpannel.SetActive(false);
+        OverPannel.SetActive(false);
     }
 
 }

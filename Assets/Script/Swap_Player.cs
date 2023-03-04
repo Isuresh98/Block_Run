@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Swap_Player : MonoBehaviour
 {
     public int Shield=3;
@@ -20,7 +20,12 @@ public class Swap_Player : MonoBehaviour
     private Animator animator;
     private GameObject dastVFX;
     private GameObject endVFX;
-
+    
+    //UI
+    int displayLevelCoin;
+    public Text LevelcoinText;
+    public Text LevelcoinText2;
+    
 
     void Start()
     {
@@ -32,12 +37,47 @@ public class Swap_Player : MonoBehaviour
         endVFX = GameObject.FindGameObjectWithTag("End");
         dastVFX.SetActive(false);
         endVFX.SetActive(false);
+
+
+        LevelcoinText.text = displayLevelCoin.ToString();
+        LevelcoinText2.text = displayLevelCoin.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+
+        if (levelUp == 3)
+        {
+            gameManager.starCount(0);
+        }
+        else if(levelUp == 2)
+        {
+            gameManager.starCount(1);
+
+        }
+        else if (levelUp == 1)
+        {
+            gameManager.starCount(2);
+
+        }
+        else if (levelUp == 0)
+        {
+            gameManager.starCount(3);
+
+        }
+
+
+
+
+
+
+
+
+        LevelcoinText2.text = displayLevelCoin.ToString();
+
+
+        LevelcoinText.text = displayLevelCoin.ToString();
         if (rb.velocity ==Vector2.zero)
         {
             animator.SetBool("isUp", false);
@@ -221,6 +261,7 @@ public class Swap_Player : MonoBehaviour
         {
             gameManager.CoinCollectamount += 1;
             Destroy(collision.gameObject);
+             displayLevelCoin+= 1;
         }
         if (collision.gameObject.CompareTag("EndBox"))
         {
