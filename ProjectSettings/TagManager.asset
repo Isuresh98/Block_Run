@@ -25,6 +25,8 @@ TagManager:
   - Win
   - Over
   - HelthUp
+  - HelthUpVFX
+  - DamageVFX
   layers:
   - Default
   - TransparentFX

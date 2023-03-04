@@ -25,22 +25,33 @@ public class Swap_Player : MonoBehaviour
     int displayLevelCoin;
     public Text LevelcoinText;
     public Text LevelcoinText2;
+
+    private GameObject HelthUpVFX;
+    private GameObject DamegeVFX;
     
 
     void Start()
     {
+
+      
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
 
+        DamegeVFX = GameObject.FindGameObjectWithTag("DamageVFX");
         dastVFX = GameObject.FindGameObjectWithTag("dastVFX");
+        HelthUpVFX = GameObject.FindGameObjectWithTag("HelthUpVFX");
         endVFX = GameObject.FindGameObjectWithTag("End");
         dastVFX.SetActive(false);
         endVFX.SetActive(false);
+        DamegeVFX.SetActive(false);
 
 
         LevelcoinText.text = displayLevelCoin.ToString();
         LevelcoinText2.text = displayLevelCoin.ToString();
+        HelthUpVFX.SetActive(false);
+
+
     }
 
     // Update is called once per frame
@@ -68,16 +79,11 @@ public class Swap_Player : MonoBehaviour
         }
 
 
-
-
-
-
-
-
         LevelcoinText2.text = displayLevelCoin.ToString();
 
-
         LevelcoinText.text = displayLevelCoin.ToString();
+
+
         if (rb.velocity ==Vector2.zero)
         {
             animator.SetBool("isUp", false);
@@ -86,10 +92,7 @@ public class Swap_Player : MonoBehaviour
             animator.SetBool("isRight", false);
            
         }
-        else
-        {
-            
-        }
+       
 
 
 
@@ -99,8 +102,10 @@ public class Swap_Player : MonoBehaviour
             Shield = 0;
             print("Game Over");
             gameState = GameState.GameOver;
+            DamegeVFX.SetActive(true);
            
         }
+
         if (levelUp <= 0&&End)
         {
             levelUp = 0;
@@ -110,12 +115,14 @@ public class Swap_Player : MonoBehaviour
 
         }
 
+
         if (gameState == GameState.GameOver)
         {
             // Game over logic
             rb.velocity = Vector2.zero; // Stop player movement
             Destroy(gameObject, 2f);
             gameManager.Menu(menu = false);
+            DamegeVFX.SetActive(true);
         }
         if (gameState == GameState.Win)
         {
@@ -141,6 +148,8 @@ public class Swap_Player : MonoBehaviour
                 animator.SetBool("isdoun", false);
                 animator.SetBool("isLeft", false);
                 animator.SetBool("isRight", false);
+               
+
 
             }
 
@@ -229,6 +238,8 @@ public class Swap_Player : MonoBehaviour
             animator.SetBool("isdoun", false);
             animator.SetBool("isLeft", false);
             animator.SetBool("isRight", false);
+            HelthUpVFX.SetActive(false);
+            DamegeVFX.SetActive(false);
         }
        
 
@@ -243,6 +254,7 @@ public class Swap_Player : MonoBehaviour
             animator.SetBool("isdoun", false);
             animator.SetBool("isLeft", false);
             animator.SetBool("isRight", false);
+            
         }
     }
 
@@ -275,6 +287,7 @@ public class Swap_Player : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyFollow"))
         {
             Shield -= 1;
+            DamegeVFX.SetActive(true);
 
         }
         if (collision.gameObject.CompareTag("HelthUp"))
@@ -282,8 +295,19 @@ public class Swap_Player : MonoBehaviour
             Shield += 1;
             Destroy(collision.gameObject);
 
+            HelthUpVFX.SetActive(true);
+
         }
+        
+
+
     }
+  
+
+
+   
+
+
 
     public enum GameState
     {
