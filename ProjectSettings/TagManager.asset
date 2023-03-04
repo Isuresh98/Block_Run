@@ -17,6 +17,14 @@ TagManager:
   - EndBox
   - LevelPanel
   - MainMenuPanel
+  - S1
+  - S2
+  - S3
+  - OverPannel
+  - WinPannel
+  - Win
+  - Over
+  - HelthUp
   layers:
   - Default
   - TransparentFX

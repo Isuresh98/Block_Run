@@ -277,6 +277,12 @@ public class Swap_Player : MonoBehaviour
             Shield -= 1;
 
         }
+        if (collision.gameObject.CompareTag("HelthUp"))
+        {
+            Shield += 1;
+            Destroy(collision.gameObject);
+
+        }
     }
 
     public enum GameState

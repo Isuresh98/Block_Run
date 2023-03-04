@@ -17,10 +17,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject OverPannel;
 
-
     private GameObject star1;
     private GameObject star2;
     private GameObject star3;
+
+    [SerializeField]
+    private GameObject star1_2;
+    [SerializeField]
+    private GameObject star2_2;
+    [SerializeField]
+    private GameObject star3_2;
 
     // Start is called before the first frame update
 
@@ -51,6 +57,10 @@ public class GameManager : MonoBehaviour
         star1.SetActive(false);
         star2.SetActive(false);
         star3.SetActive(false);
+
+        star1_2.SetActive(false);
+        star2_2.SetActive(false);
+        star3_2.SetActive(false);
 
     }
 
@@ -98,24 +108,40 @@ public class GameManager : MonoBehaviour
             star1.SetActive(false);
             star2.SetActive(false);
             star3.SetActive(false);
+
+            star1_2.SetActive(false);
+            star2_2.SetActive(false);
+            star3_2.SetActive(false);
         }
         if (StarCount == 1)
         {
             star1.SetActive(true);
             star2.SetActive(false);
             star3.SetActive(false);
+
+            star1_2.SetActive(true);
+            star2_2.SetActive(false);
+            star3_2.SetActive(false);
         }
         if (StarCount == 2)
         {
             star1.SetActive(true);
             star2.SetActive(true);
             star3.SetActive(false);
+
+            star1_2.SetActive(true);
+            star2_2.SetActive(true);
+            star3_2.SetActive(false);
         }
         if (StarCount == 3)
         {
             star1.SetActive(true);
             star2.SetActive(true);
             star3.SetActive(true);
+
+            star1_2.SetActive(true);
+            star2_2.SetActive(true);
+            star3_2.SetActive(true);
         }
     }
 }
