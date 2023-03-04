@@ -82,7 +82,7 @@ public class Swap_Player : MonoBehaviour
             End =true;
             levelUp = 0;
             rb.velocity = Vector2.zero; // Stop player movement
-
+            endVFX.SetActive(true);
             Destroy(gameObject);
             gameManager.Menu(menu=true);
             
@@ -226,9 +226,9 @@ public class Swap_Player : MonoBehaviour
         {
             if (levelUp == 0)
             {
-               
+                
                 End = true;
-                endVFX.SetActive(true);
+                
             }
         }
         if (collision.gameObject.CompareTag("EnemyFollow"))
