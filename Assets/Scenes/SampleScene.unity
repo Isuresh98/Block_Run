@@ -28220,7 +28220,7 @@ GameObject:
   - component: {fileID: 1888281975860912209}
   - component: {fileID: 1888281975860912222}
   m_Layer: 5
-  m_Name: Profile Coin Style 2
+  m_Name: Coin Plat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
