@@ -27,6 +27,8 @@ TagManager:
   - HelthUp
   - HelthUpVFX
   - DamageVFX
+  - StarVFX
+  - MainMenuStart
   layers:
   - Default
   - TransparentFX

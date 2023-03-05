@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject star3_2;
 
+
+
     // Start is called before the first frame update
 
     private void Awake()
@@ -37,22 +39,9 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-       
-
-       
-
-        // Display the level coin amount in the LevelcoinText
-
-        coinText.text= CoinCollectamount.ToString();
-        SheildText.text = "Sheild: " + Sheild.ToString();
-        CoinCollectamount = PlayerPrefs.GetInt("Score", 0);
-
         star1 = GameObject.FindGameObjectWithTag("S1");
         star2 = GameObject.FindGameObjectWithTag("S2");
         star3 = GameObject.FindGameObjectWithTag("S3");
-
-
-       
 
         star1.SetActive(false);
         star2.SetActive(false);
@@ -61,6 +50,15 @@ public class GameManager : MonoBehaviour
         star1_2.SetActive(false);
         star2_2.SetActive(false);
         star3_2.SetActive(false);
+
+      
+        // Display the level coin amount in the LevelcoinText
+
+        coinText.text= CoinCollectamount.ToString();
+        SheildText.text = "Sheild: " + Sheild.ToString();
+        CoinCollectamount = PlayerPrefs.GetInt("Score", 0);
+
+        
 
     }
 
@@ -75,9 +73,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Update the level coin amount in the LevelcoinText
-     
+      
         coinText.text = CoinCollectamount.ToString();
         SheildText.text =  Sheild.ToString();
+        
     }
 
     public void Menu(bool menu)

@@ -28,6 +28,7 @@ public class Swap_Player : MonoBehaviour
 
     private GameObject HelthUpVFX;
     private GameObject DamegeVFX;
+    private GameObject StarVFX;
     
 
     void Start()
@@ -40,11 +41,13 @@ public class Swap_Player : MonoBehaviour
 
         DamegeVFX = GameObject.FindGameObjectWithTag("DamageVFX");
         dastVFX = GameObject.FindGameObjectWithTag("dastVFX");
+        StarVFX = GameObject.FindGameObjectWithTag("StarVFX");
         HelthUpVFX = GameObject.FindGameObjectWithTag("HelthUpVFX");
         endVFX = GameObject.FindGameObjectWithTag("End");
         dastVFX.SetActive(false);
         endVFX.SetActive(false);
         DamegeVFX.SetActive(false);
+        StarVFX.SetActive(false);
 
 
         LevelcoinText.text = displayLevelCoin.ToString();
@@ -240,8 +243,10 @@ public class Swap_Player : MonoBehaviour
             animator.SetBool("isRight", false);
             HelthUpVFX.SetActive(false);
             DamegeVFX.SetActive(false);
+            StarVFX.SetActive(false);
+
         }
-       
+
 
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -268,6 +273,7 @@ public class Swap_Player : MonoBehaviour
         {
             levelUp -= 1;
             Destroy(collision.gameObject);
+            StarVFX.SetActive(true);
         }
         if (collision.gameObject.CompareTag("coin"))
         {
