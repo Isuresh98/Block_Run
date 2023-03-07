@@ -17,7 +17,7 @@ public class Swap_Player : MonoBehaviour
     private bool End = false;
     private bool menu;
     public GameState gameState = GameState.Playing;
-    private Animator animator;
+  
     private GameObject dastVFX;
     private GameObject endVFX;
     
@@ -29,6 +29,13 @@ public class Swap_Player : MonoBehaviour
     private GameObject HelthUpVFX;
     private GameObject DamegeVFX;
     private GameObject StarVFX;
+
+    //animation
+
+    private GameObject upTall;
+    private GameObject dounTall;
+    private GameObject leftTall;
+    private GameObject rightTall;
     
 
     void Start()
@@ -37,7 +44,15 @@ public class Swap_Player : MonoBehaviour
       
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        animator = GetComponent<Animator>();
+
+        //Animation
+        upTall = GameObject.FindGameObjectWithTag("UpTall");
+        dounTall = GameObject.FindGameObjectWithTag("DounTall");
+        leftTall = GameObject.FindGameObjectWithTag("LeftTall");
+        leftTall = GameObject.FindGameObjectWithTag("LeftTall");
+        rightTall = GameObject.FindGameObjectWithTag("RightTall");
+
+
 
         DamegeVFX = GameObject.FindGameObjectWithTag("DamageVFX");
         dastVFX = GameObject.FindGameObjectWithTag("dastVFX");
@@ -54,7 +69,11 @@ public class Swap_Player : MonoBehaviour
         LevelcoinText2.text = displayLevelCoin.ToString();
         HelthUpVFX.SetActive(false);
 
-
+        //animation
+        leftTall.SetActive(false);
+        rightTall.SetActive(false);
+        upTall.SetActive(false);
+        dounTall.SetActive(false);
     }
 
     // Update is called once per frame
@@ -87,14 +106,7 @@ public class Swap_Player : MonoBehaviour
         LevelcoinText.text = displayLevelCoin.ToString();
 
 
-        if (rb.velocity ==Vector2.zero)
-        {
-            animator.SetBool("isUp", false);
-            animator.SetBool("isdoun", false);
-            animator.SetBool("isLeft", false);
-            animator.SetBool("isRight", false);
-           
-        }
+        
        
 
 
@@ -147,10 +159,7 @@ public class Swap_Player : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 fingerDownPosition = touch.position;
-                animator.SetBool("isUp", false);
-                animator.SetBool("isdoun", false);
-                animator.SetBool("isLeft", false);
-                animator.SetBool("isRight", false);
+               
                
 
 
@@ -207,28 +216,40 @@ public class Swap_Player : MonoBehaviour
     void MoveRight()
     {
         rb.velocity = new Vector2(movementSpeed, 0);
-        animator.SetBool("isRight", true);
 
+        leftTall.SetActive(true);
+        rightTall.SetActive(false);
+        upTall.SetActive(false);
+        dounTall.SetActive(false);
 
     }
 
     void MoveLeft()
     {
         rb.velocity = new Vector2(-movementSpeed, 0);
-        animator.SetBool("isLeft", true);
+        leftTall.SetActive(false);
+        rightTall.SetActive(true);
+        upTall.SetActive(false);
+        dounTall.SetActive(false);
 
     }
 
     void MoveUp()
     {
         rb.velocity = new Vector2(0, movementSpeed);
-        animator.SetBool("isUp", true);
+        leftTall.SetActive(false);
+        rightTall.SetActive(false);
+        upTall.SetActive(false);
+        dounTall.SetActive(true);
     }
 
     void MoveDown()
     {
         rb.velocity = new Vector2(0, -movementSpeed);
-        animator.SetBool("isdoun", true);
+        leftTall.SetActive(false);
+        rightTall.SetActive(false);
+        upTall.SetActive(true);
+        dounTall.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -237,10 +258,7 @@ public class Swap_Player : MonoBehaviour
         {
             dastVFX.SetActive(true);
             rb.velocity = Vector2.zero; // Stop movement when finger is lifted off the screen
-            animator.SetBool("isUp", false);
-            animator.SetBool("isdoun", false);
-            animator.SetBool("isLeft", false);
-            animator.SetBool("isRight", false);
+            
             HelthUpVFX.SetActive(false);
             DamegeVFX.SetActive(false);
             StarVFX.SetActive(false);
@@ -255,10 +273,7 @@ public class Swap_Player : MonoBehaviour
         {
             dastVFX.SetActive(false);
 
-            animator.SetBool("isUp", false);
-            animator.SetBool("isdoun", false);
-            animator.SetBool("isLeft", false);
-            animator.SetBool("isRight", false);
+            
             
         }
     }

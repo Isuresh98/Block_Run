@@ -29,6 +29,10 @@ TagManager:
   - DamageVFX
   - StarVFX
   - MainMenuStart
+  - UpTall
+  - DounTall
+  - LeftTall
+  - RightTall
   layers:
   - Default
   - TransparentFX
