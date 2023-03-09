@@ -50,6 +50,7 @@ namespace Pathfinding {
 		void Update () {
 			if (target != null && ai != null)
             {
+
 				float distanceToTarget = Vector3.Distance(transform.position, target.position);
 				if (distanceToTarget <= activationDistance && ai.destination != target.position)
                 {
