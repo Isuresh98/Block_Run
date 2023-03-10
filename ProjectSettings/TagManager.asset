@@ -33,6 +33,7 @@ TagManager:
   - DounTall
   - LeftTall
   - RightTall
+  - SheldP
   layers:
   - Default
   - TransparentFX

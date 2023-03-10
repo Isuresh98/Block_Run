@@ -2,7 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Swap_Player : MonoBehaviour
 {
-    public int Shield=3;
+    //timer set
+   
+
+    [SerializeField] private float currentTime; // The current time left
+
+    private GameObject SheldPannel;
+
+
+    public int Shield;
     public int levelUp = 3;
 
     private Vector2 fingerDownPosition;
@@ -36,12 +44,17 @@ public class Swap_Player : MonoBehaviour
     private GameObject dounTall;
     private GameObject leftTall;
     private GameObject rightTall;
-    
+
+    private Animator Playanim;
+
+    //game over
+    private bool GameOver;
 
     void Start()
     {
 
-      
+        Playanim = GetComponent<Animator>();
+
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
@@ -51,6 +64,7 @@ public class Swap_Player : MonoBehaviour
         leftTall = GameObject.FindGameObjectWithTag("LeftTall");
         leftTall = GameObject.FindGameObjectWithTag("LeftTall");
         rightTall = GameObject.FindGameObjectWithTag("RightTall");
+        SheldPannel = GameObject.FindGameObjectWithTag("SheldP");
 
 
 
@@ -74,11 +88,38 @@ public class Swap_Player : MonoBehaviour
         rightTall.SetActive(false);
         upTall.SetActive(false);
         dounTall.SetActive(false);
+
+        SheldPannel.SetActive(false);
+        GameOver = false;
+
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+        //timer
+        currentTime -= Time.deltaTime;
+        
+        int timeInt = Mathf.RoundToInt(currentTime);
+        Shield = timeInt;
+
+
+        if (currentTime <= 0f)
+        {
+            Playanim.SetBool("IsSheld", false);
+
+            SheldPannel.SetActive(false);
+
+            // Time is up
+            currentTime = 0f;
+          
+        }
+
+
+
+
+
 
         if (levelUp == 3)
         {
@@ -112,12 +153,13 @@ public class Swap_Player : MonoBehaviour
 
 
         gameManager.Sheild = Shield;
-        if (Shield <= 0)
+        if (GameOver)
         {
+            
             Shield = 0;
             print("Game Over");
             gameState = GameState.GameOver;
-            DamegeVFX.SetActive(true);
+            
            
         }
 
@@ -307,16 +349,27 @@ public class Swap_Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("EnemyFollow"))
         {
+           
+          
+            if (Shield==0)
+            {
+                GameOver = true;
+                Destroy(gameObject, 1f);
+            }
+
             Shield -= 1;
             DamegeVFX.SetActive(true);
 
         }
         if (collision.gameObject.CompareTag("HelthUp"))
         {
-            Shield += 1;
+            Playanim.SetBool("IsSheld", true);
+            SheldPannel.SetActive(true);
+            currentTime = 10f;
             Destroy(collision.gameObject);
 
             HelthUpVFX.SetActive(true);
+            
 
         }
         
