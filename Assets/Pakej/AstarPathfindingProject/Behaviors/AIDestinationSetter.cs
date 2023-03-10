@@ -19,19 +19,9 @@ namespace Pathfinding {
 		IAstarAI ai;
 		[SerializeField]
 		private float activationDistance;
-<<<<<<< HEAD
-
-		
-		private void Start()
-        {
-			
-			target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-			
-=======
 		private void Start()
         {
 			target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
->>>>>>> parent of 0eefe4e (enemy and player update)
 		}
         void OnEnable () {
 			ai = GetComponent<IAstarAI>();
@@ -56,11 +46,7 @@ namespace Pathfinding {
                 {
 					{
 						activationDistance = 15f;
-<<<<<<< HEAD
-						
-=======
 
->>>>>>> parent of 0eefe4e (enemy and player update)
 						ai.destination = target.position;
 					}
 				}
