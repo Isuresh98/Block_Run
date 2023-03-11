@@ -49,7 +49,7 @@ public class Swap_Player : MonoBehaviour
 
     //game over
     private bool GameOver;
-
+    private int hitCount;
     void Start()
     {
 
@@ -92,7 +92,7 @@ public class Swap_Player : MonoBehaviour
         SheldPannel.SetActive(false);
         GameOver = false;
 
-       
+        hitCount = 0;
     }
 
     // Update is called once per frame
@@ -107,7 +107,7 @@ public class Swap_Player : MonoBehaviour
 
         if (currentTime <= 0f)
         {
-            Playanim.SetBool("IsSheld", false);
+           
 
             SheldPannel.SetActive(false);
 
@@ -116,10 +116,15 @@ public class Swap_Player : MonoBehaviour
           
         }
 
-
-
-
-
+        if (hitCount == 1)
+        {
+            Playanim.SetBool("IsSheld", false);
+        }
+        if (hitCount == 2)
+        {
+            GameOver = true;
+            Destroy(gameObject, 1f);
+        }
 
         if (levelUp == 3)
         {
@@ -349,21 +354,15 @@ public class Swap_Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("EnemyFollow"))
         {
-           
-          
-            if (Shield==0)
-            {
-                GameOver = true;
-                Destroy(gameObject, 1f);
-            }
+            hitCount++;
 
-            Shield -= 1;
             DamegeVFX.SetActive(true);
 
         }
         if (collision.gameObject.CompareTag("HelthUp"))
         {
             Playanim.SetBool("IsSheld", true);
+            hitCount = 0;
             SheldPannel.SetActive(true);
             currentTime = 10f;
             Destroy(collision.gameObject);
