@@ -35,6 +35,7 @@ TagManager:
   - RightTall
   - SheldP
   - Path
+  - PosVolum
   layers:
   - Default
   - TransparentFX

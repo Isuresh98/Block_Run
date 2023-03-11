@@ -7,7 +7,7 @@ public class CamColorChange : MonoBehaviour
     public float bloomIntensity = 1.0f;
 
     private Bloom bloomEffect;
-    public float bloomSoftKnee = 1f; // adjust the soft knee value
+    public float bloomSoftKnee = 35f; // adjust the soft knee value
 
 
     private void Start()
@@ -31,7 +31,7 @@ public class CamColorChange : MonoBehaviour
        // bloomColor = new Color(Random.value, Random.value, Random.value);
 
         // Generate random intensity value between 0.5 and 2.0
-        bloomIntensity = Random.Range(100f, 150f);
+        bloomIntensity = Random.Range(30f, 35f);
 
         
     }

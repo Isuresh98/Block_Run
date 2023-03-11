@@ -49,6 +49,7 @@ public class Swap_Player : MonoBehaviour
 
     //game over
     private bool GameOver;
+    [SerializeField]
     private int hitCount;
     public CameraShake cameraShake;
     public CamColorChange camColor;
