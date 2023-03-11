@@ -34,6 +34,7 @@ TagManager:
   - LeftTall
   - RightTall
   - SheldP
+  - Path
   layers:
   - Default
   - TransparentFX

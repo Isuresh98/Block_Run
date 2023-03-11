@@ -50,11 +50,15 @@ public class Swap_Player : MonoBehaviour
     //game over
     private bool GameOver;
     private int hitCount;
+    public CameraShake cameraShake;
+    public CamColorChange camColor;
+
     void Start()
     {
 
         Playanim = GetComponent<Animator>();
-
+        cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
+        camColor = GameObject.FindGameObjectWithTag("PosVolum").GetComponent<CamColorChange>();
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
@@ -92,6 +96,7 @@ public class Swap_Player : MonoBehaviour
         SheldPannel.SetActive(false);
         GameOver = false;
 
+        Playanim.SetBool("IsSheld", true);
         hitCount = 0;
     }
 
@@ -119,30 +124,40 @@ public class Swap_Player : MonoBehaviour
         if (hitCount == 1)
         {
             Playanim.SetBool("IsSheld", false);
+            hitCount = 1;
         }
+
         if (hitCount == 2)
         {
+            hitCount = 2;
             GameOver = true;
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, 2f);
         }
 
         if (levelUp == 3)
         {
             gameManager.starCount(0);
+
+
         }
         else if(levelUp == 2)
         {
             gameManager.starCount(1);
+           
 
         }
         else if (levelUp == 1)
         {
             gameManager.starCount(2);
+           
+            
 
         }
         else if (levelUp == 0)
         {
             gameManager.starCount(3);
+            
+            
 
         }
 
@@ -164,8 +179,7 @@ public class Swap_Player : MonoBehaviour
             Shield = 0;
             print("Game Over");
             gameState = GameState.GameOver;
-            
-           
+          
         }
 
         if (levelUp <= 0&&End)
@@ -182,9 +196,12 @@ public class Swap_Player : MonoBehaviour
         {
             // Game over logic
             rb.velocity = Vector2.zero; // Stop player movement
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 5f);
             gameManager.Menu(menu = false);
             DamegeVFX.SetActive(true);
+            cameraShake.shakeDuration = 0.7f;
+            cameraShake.ShakeCamera();
+            camColor.ColorAndIntensity();
         }
         if (gameState == GameState.Win)
         {
@@ -237,8 +254,7 @@ public class Swap_Player : MonoBehaviour
                 else
                 {
                     MoveLeft();
-                   
-                   
+                 
 
                 }
             }
@@ -330,12 +346,20 @@ public class Swap_Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if (collision.gameObject.CompareTag("Star"))
+
+        if (collision.gameObject.CompareTag("Path"))
         {
+            Destroy(collision.gameObject);
+        }
+            if (collision.gameObject.CompareTag("Star"))
+        {
+            
+            cameraShake.ShakeCamera();
             levelUp -= 1;
             Destroy(collision.gameObject);
             StarVFX.SetActive(true);
+           
+
         }
         if (collision.gameObject.CompareTag("coin"))
         {
@@ -354,9 +378,11 @@ public class Swap_Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("EnemyFollow"))
         {
+            Playanim.SetBool("IsSheld", false);
+            
+            DamegeVFX.SetActive(true);
             hitCount++;
 
-            DamegeVFX.SetActive(true);
 
         }
         if (collision.gameObject.CompareTag("HelthUp"))
@@ -368,6 +394,7 @@ public class Swap_Player : MonoBehaviour
             Destroy(collision.gameObject);
 
             HelthUpVFX.SetActive(true);
+           
             
 
         }
