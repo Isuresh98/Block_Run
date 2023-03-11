@@ -210,9 +210,11 @@ public class Swap_Player : MonoBehaviour
             levelUp = 0;
             rb.velocity = Vector2.zero; // Stop player movement
             endVFX.SetActive(true);
-            Destroy(gameObject);
+            Destroy(gameObject,4f);
             gameManager.Menu(menu=true);
-            
+            camColor.ColorAndIntensity();
+
+
         }
 
 
@@ -374,8 +376,10 @@ public class Swap_Player : MonoBehaviour
             {
                 
                 End = true;
-                
+                Animator anim = collision.gameObject.GetComponent<Animator>();
+                anim.SetBool("isEnd", true);
             }
+           
         }
         if (collision.gameObject.CompareTag("EnemyFollow"))
         {

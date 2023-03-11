@@ -44,4 +44,5 @@ public class CamColorChange : MonoBehaviour
         bloomEffect.color.value = bloomColor;
         bloomEffect.intensity.value = bloomIntensity;
     }
+
 }
