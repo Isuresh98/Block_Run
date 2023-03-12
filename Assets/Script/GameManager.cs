@@ -83,6 +83,8 @@ public class GameManager : MonoBehaviour
       
         coinText.text = CoinCollectamount.ToString();
         SheildText.text =  Sheild.ToString();
+
+      
         
     }
 

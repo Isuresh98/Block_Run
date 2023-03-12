@@ -64,8 +64,12 @@ public class Swap_Player : MonoBehaviour
     public AudioClip SheldHitSound;
     public AudioClip BGSound;
 
+    //adsmanager
+    private AdManager adsmanager;
+    public bool IntasitialAds;
     void Start()
     {
+        IntasitialAds = false;
 
         //sound effect
         audioSource = GetComponent<AudioSource>();
@@ -120,6 +124,9 @@ public class Swap_Player : MonoBehaviour
 
         Playanim.SetBool("IsSheld", true);
         hitCount = 0;
+
+        //adsmanage
+        adsmanager = GameObject.FindGameObjectWithTag("ads").GetComponent<AdManager>();
     }
 
     // Update is called once per frame
@@ -201,11 +208,13 @@ public class Swap_Player : MonoBehaviour
             Shield = 0;
             print("Game Over");
             gameState = GameState.GameOver;
+           
+           
             if (gameoverSound != null)
             {
                 audioSource.PlayOneShot(gameoverSound);
             }
-
+           
         }
 
         if (levelUp <= 0&&End)
@@ -231,6 +240,7 @@ public class Swap_Player : MonoBehaviour
             cameraShake.shakeDuration = 0.7f;
             cameraShake.ShakeCamera();
             camColor.ColorAndIntensity();
+            IntasitialAds = true;
         }
         if (gameState == GameState.Win)
         {
