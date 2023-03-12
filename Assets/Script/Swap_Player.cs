@@ -54,8 +54,29 @@ public class Swap_Player : MonoBehaviour
     public CameraShake cameraShake;
     public CamColorChange camColor;
 
+    //sound Effect
+    public AudioClip gameoverSound;
+    public AudioClip GameWinSound;
+    private AudioSource audioSource;
+    public AudioClip StarHitSound;
+    public AudioClip EnemyHitSound;
+    public AudioClip CoinHitSound;
+    public AudioClip SheldHitSound;
+    public AudioClip BGSound;
+
     void Start()
     {
+
+        //sound effect
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = BGSound;
+        audioSource.loop = true;
+        audioSource.Play();
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
 
         Playanim = GetComponent<Animator>();
         cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
@@ -180,7 +201,11 @@ public class Swap_Player : MonoBehaviour
             Shield = 0;
             print("Game Over");
             gameState = GameState.GameOver;
-          
+            if (gameoverSound != null)
+            {
+                audioSource.PlayOneShot(gameoverSound);
+            }
+
         }
 
         if (levelUp <= 0&&End)
@@ -188,7 +213,10 @@ public class Swap_Player : MonoBehaviour
             levelUp = 0;
             print("Game Win");        
             gameState = GameState.Win;
-           
+            if (GameWinSound != null)
+            {
+                audioSource.PlayOneShot(GameWinSound);
+            }
 
         }
 
@@ -354,21 +382,31 @@ public class Swap_Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
-            if (collision.gameObject.CompareTag("Star"))
+           
+        if (collision.gameObject.CompareTag("Star"))
         {
             
             cameraShake.ShakeCamera();
             levelUp -= 1;
             Destroy(collision.gameObject);
             StarVFX.SetActive(true);
-           
+            if (GameWinSound != null)
+            {
+                audioSource.PlayOneShot(StarHitSound);
+            }
+
 
         }
+
         if (collision.gameObject.CompareTag("coin"))
         {
             gameManager.CoinCollectamount += 1;
             Destroy(collision.gameObject);
              displayLevelCoin+= 1;
+            if (GameWinSound != null)
+            {
+                audioSource.PlayOneShot(CoinHitSound);
+            }
         }
         if (collision.gameObject.CompareTag("EndBox"))
         {
@@ -387,9 +425,14 @@ public class Swap_Player : MonoBehaviour
             
             DamegeVFX.SetActive(true);
             hitCount++;
+            if (GameWinSound != null)
+            {
+                audioSource.PlayOneShot(EnemyHitSound);
+            }
 
 
         }
+
         if (collision.gameObject.CompareTag("HelthUp"))
         {
             Playanim.SetBool("IsSheld", true);
@@ -399,13 +442,13 @@ public class Swap_Player : MonoBehaviour
             Destroy(collision.gameObject);
 
             HelthUpVFX.SetActive(true);
-           
-            
+            if (GameWinSound != null)
+            {
+                audioSource.PlayOneShot(SheldHitSound);
+            }
 
         }
         
-
-
     }
   
 
