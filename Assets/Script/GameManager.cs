@@ -28,6 +28,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject star3_2;
 
+    //audio Effecr
+    private AudioSource audioSource;
+    
+  
 
 
     // Start is called before the first frame update
@@ -39,6 +43,9 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        //Audio 
+        
+
         star1 = GameObject.FindGameObjectWithTag("S1");
         star2 = GameObject.FindGameObjectWithTag("S2");
         star3 = GameObject.FindGameObjectWithTag("S3");

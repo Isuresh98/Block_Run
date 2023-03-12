@@ -385,28 +385,23 @@ public class Swap_Player : MonoBehaviour
            
         if (collision.gameObject.CompareTag("Star"))
         {
-            
             cameraShake.ShakeCamera();
+            audioSource.PlayOneShot(StarHitSound);
             levelUp -= 1;
             Destroy(collision.gameObject);
             StarVFX.SetActive(true);
-            if (GameWinSound != null)
-            {
-                audioSource.PlayOneShot(StarHitSound);
-            }
-
-
+      
         }
 
         if (collision.gameObject.CompareTag("coin"))
         {
+            audioSource.PlayOneShot(CoinHitSound);
             gameManager.CoinCollectamount += 1;
             Destroy(collision.gameObject);
              displayLevelCoin+= 1;
-            if (GameWinSound != null)
-            {
-                audioSource.PlayOneShot(CoinHitSound);
-            }
+           
+               
+            
         }
         if (collision.gameObject.CompareTag("EndBox"))
         {
@@ -421,20 +416,18 @@ public class Swap_Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("EnemyFollow"))
         {
+            audioSource.PlayOneShot(EnemyHitSound);
             Playanim.SetBool("IsSheld", false);
             
             DamegeVFX.SetActive(true);
             hitCount++;
-            if (GameWinSound != null)
-            {
-                audioSource.PlayOneShot(EnemyHitSound);
-            }
-
+            
 
         }
 
         if (collision.gameObject.CompareTag("HelthUp"))
         {
+            audioSource.PlayOneShot(SheldHitSound);
             Playanim.SetBool("IsSheld", true);
             hitCount = 0;
             SheldPannel.SetActive(true);
@@ -442,10 +435,9 @@ public class Swap_Player : MonoBehaviour
             Destroy(collision.gameObject);
 
             HelthUpVFX.SetActive(true);
-            if (GameWinSound != null)
-            {
-                audioSource.PlayOneShot(SheldHitSound);
-            }
+           
+           
+           
 
         }
         
