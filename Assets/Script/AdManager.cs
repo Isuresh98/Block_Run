@@ -9,6 +9,10 @@ public class AdManager : MonoBehaviour
     public string bannerAdUnitId = "your_banner_ad_unit_id";
     public string interstitialAdUnitId = "your_interstitial_ad_unit_id";
     private Swap_Player Playerscript;
+
+    public float bannerInterval = 10f; // interval in seconds
+    [SerializeField]
+    private float timeSinceBannerShown = 0f;
     private void Start()
     {
         Playerscript = GameObject.FindGameObjectWithTag("Player").GetComponent<Swap_Player>();
@@ -26,11 +30,20 @@ public class AdManager : MonoBehaviour
         interstitial.LoadAd(interstitialRequest);
 
         HideBannerAd();
+
+       
     }
     private void Update()
     {
-       
-        
+
+        timeSinceBannerShown += Time.deltaTime;
+
+        if (timeSinceBannerShown >= bannerInterval)
+        {
+            ShowBannerAd();
+            timeSinceBannerShown = 0f;
+        }
+
         if (Playerscript.IntasitialAds == true)
         {
             Time.timeScale = 0;
@@ -42,6 +55,7 @@ public class AdManager : MonoBehaviour
                 // Resume the game
                 Time.timeScale = 1;
             }
+            
             
         }
     }

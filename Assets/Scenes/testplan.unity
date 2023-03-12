@@ -2059,6 +2059,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bannerAdUnitId: ca-app-pub-3940256099942544/6300978111
   interstitialAdUnitId: ca-app-pub-3940256099942544/8691691433
+  bannerInterval: 10
+  timeSinceBannerShown: 0
 --- !u!4 &560982097
 Transform:
   m_ObjectHideFlags: 0
