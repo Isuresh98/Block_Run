@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/testplan.unity
     guid: 20c0fb255119a904c9a7a948bb68dac5
   - enabled: 1
-    path: Assets/Scenes/2.unity
+    path: Assets/Scenes/L.unity
     guid: f73eaf82b44f80b41b68c47ed2520699
+  - enabled: 1
+    path: Assets/Scenes/tes2.unity
+    guid: 549c2581c9221664e8c799ec6ffe29c6
   m_configObjects: {}

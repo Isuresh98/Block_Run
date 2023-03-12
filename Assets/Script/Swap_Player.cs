@@ -70,6 +70,7 @@ public class Swap_Player : MonoBehaviour
     void Start()
     {
         IntasitialAds = false;
+        PlayerPrefs.SetInt("Level1", 1);
 
         //sound effect
         audioSource = GetComponent<AudioSource>();
@@ -219,6 +220,7 @@ public class Swap_Player : MonoBehaviour
 
         if (levelUp <= 0&&End)
         {
+            PlayerPrefs.SetInt("Level2", 1);
             levelUp = 0;
             print("Game Win");        
             gameState = GameState.Win;

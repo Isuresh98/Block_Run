@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,9 +31,9 @@ public class GameManager : MonoBehaviour
 
     //audio Effecr
     private AudioSource audioSource;
-    
-  
 
+    public Text sceneIndexText;
+    public Text sceneIndexText2;
 
     // Start is called before the first frame update
 
@@ -44,7 +45,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //Audio 
-        
+        // Get the current scene index
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Display the scene index in the UI Text
+        sceneIndexText.text = "Level  " + sceneIndex.ToString();
+        sceneIndexText2.text = "Level  " + sceneIndex.ToString();
 
         star1 = GameObject.FindGameObjectWithTag("S1");
         star2 = GameObject.FindGameObjectWithTag("S2");
