@@ -57,12 +57,12 @@ public class Swap_Player : MonoBehaviour
     //sound Effect
     public AudioClip gameoverSound;
     public AudioClip GameWinSound;
-    private AudioSource audioSource;
     public AudioClip StarHitSound;
     public AudioClip EnemyHitSound;
     public AudioClip CoinHitSound;
     public AudioClip SheldHitSound;
     public AudioClip BGSound;
+    private AudioSource audioSource;
 
     //adsmanager
     private AdManager adsmanager;
