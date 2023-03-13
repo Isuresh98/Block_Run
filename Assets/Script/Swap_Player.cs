@@ -166,18 +166,21 @@ public class Swap_Player : MonoBehaviour
 
         if (levelUp == 3)
         {
+            levelUp = 3;
             gameManager.starCount(0);
 
 
         }
         else if(levelUp == 2)
         {
+            levelUp = 2;
             gameManager.starCount(1);
            
 
         }
         else if (levelUp == 1)
         {
+            levelUp = 1;
             gameManager.starCount(2);
            
             
@@ -185,6 +188,7 @@ public class Swap_Player : MonoBehaviour
         }
         else if (levelUp == 0)
         {
+            levelUp = 0;
             gameManager.starCount(3);
             
             
@@ -397,9 +401,9 @@ public class Swap_Player : MonoBehaviour
            
         if (collision.gameObject.CompareTag("Star"))
         {
+            levelUp -= 1;
             cameraShake.ShakeCamera();
             audioSource.PlayOneShot(StarHitSound);
-            levelUp -= 1;
             Destroy(collision.gameObject);
             StarVFX.SetActive(true);
       

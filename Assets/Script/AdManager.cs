@@ -13,8 +13,10 @@ public class AdManager : MonoBehaviour
     public float bannerInterval = 10f; // interval in seconds
     [SerializeField]
     private float timeSinceBannerShown = 0f;
+    bool bannerShown = false;
     private void Start()
     {
+       
         Playerscript = GameObject.FindGameObjectWithTag("Player").GetComponent<Swap_Player>();
 
         MobileAds.Initialize(initStatus => { });
@@ -31,17 +33,18 @@ public class AdManager : MonoBehaviour
 
         HideBannerAd();
 
-       
+
+
     }
     private void Update()
     {
 
         timeSinceBannerShown += Time.deltaTime;
 
-        if (timeSinceBannerShown >= bannerInterval)
+        if (!bannerShown && timeSinceBannerShown >= bannerInterval)
         {
             ShowBannerAd();
-            timeSinceBannerShown = 0f;
+            bannerShown = true;
         }
 
         if (Playerscript.IntasitialAds == true)
@@ -71,6 +74,8 @@ public class AdManager : MonoBehaviour
     public void ShowBannerAd()
     {
         bannerView.Show();
+        timeSinceBannerShown = 0f;
+        bannerShown = false;
     }
 
     public void HideBannerAd()
