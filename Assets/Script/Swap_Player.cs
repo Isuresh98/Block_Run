@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class Swap_Player : MonoBehaviour
 {
     //timer set
@@ -70,7 +71,9 @@ public class Swap_Player : MonoBehaviour
     void Start()
     {
         IntasitialAds = false;
-        PlayerPrefs.SetInt("Level1", 1);
+      
+      
+      
 
         //sound effect
         audioSource = GetComponent<AudioSource>();
@@ -224,7 +227,13 @@ public class Swap_Player : MonoBehaviour
 
         if (levelUp <= 0&&End)
         {
-            PlayerPrefs.SetInt("Level2", 1);
+            // Load the next level
+            int nextLevelIndex = SceneManager.GetActiveScene().buildIndex + 1;
+           
+
+            // Set the "Level2" PlayerPrefs value to 1 for the next level
+            PlayerPrefs.SetInt("Level" + nextLevelIndex.ToString(), 1);
+           
             levelUp = 0;
             print("Game Win");        
             gameState = GameState.Win;
