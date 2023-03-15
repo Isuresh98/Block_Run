@@ -158,4 +158,10 @@ public class GameManager : MonoBehaviour
             star3_2.SetActive(true);
         }
     }
+
+    public void nextLoad()
+    {
+        int nextLevelIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        SceneManager.LoadScene(nextLevelIndex);
+    }
 }
