@@ -19,8 +19,8 @@ public class Swap_Player : MonoBehaviour
 
     [SerializeField]
     private float minDistanceForSwipe = 20f;
-    [SerializeField]
-    private float movementSpeed = 5f;
+    
+    private float movementSpeed = 165f;
     private Rigidbody2D rb;
     private GameManager gameManager;
     private bool End = false;
@@ -335,7 +335,7 @@ public class Swap_Player : MonoBehaviour
 
     void MoveRight()
     {
-        rb.velocity = new Vector2(movementSpeed, 0);
+        rb.velocity = new Vector2(movementSpeed*Time.deltaTime, 0);
 
         leftTall.SetActive(true);
         rightTall.SetActive(false);
@@ -346,7 +346,7 @@ public class Swap_Player : MonoBehaviour
 
     void MoveLeft()
     {
-        rb.velocity = new Vector2(-movementSpeed, 0);
+        rb.velocity = new Vector2(-movementSpeed * Time.deltaTime, 0);
         leftTall.SetActive(false);
         rightTall.SetActive(true);
         upTall.SetActive(false);
@@ -356,7 +356,7 @@ public class Swap_Player : MonoBehaviour
 
     void MoveUp()
     {
-        rb.velocity = new Vector2(0, movementSpeed);
+        rb.velocity = new Vector2(0, movementSpeed * Time.deltaTime);
         leftTall.SetActive(false);
         rightTall.SetActive(false);
         upTall.SetActive(false);
@@ -365,7 +365,7 @@ public class Swap_Player : MonoBehaviour
 
     void MoveDown()
     {
-        rb.velocity = new Vector2(0, -movementSpeed);
+        rb.velocity = new Vector2(0, -movementSpeed * Time.deltaTime);
         leftTall.SetActive(false);
         rightTall.SetActive(false);
         upTall.SetActive(true);

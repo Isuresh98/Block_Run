@@ -17736,7 +17736,7 @@ MonoBehaviour:
   Shield: 50
   levelUp: 3
   minDistanceForSwipe: 20
-  movementSpeed: 35
+  movementSpeed: 160
   gameState: 0
   LevelcoinText: {fileID: 1549996611192083478}
   LevelcoinText2: {fileID: 1284266376}

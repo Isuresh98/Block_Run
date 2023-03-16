@@ -61,7 +61,7 @@
   </files>
   <settings>
     <setting name="androidAbis" value="armeabi-v7a" />
-    <setting name="bundleId" value="com.DefaultCompany.Project_01" />
+    <setting name="bundleId" value="com.DefaultCompany.tetbuld_1" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
     <setting name="gradlePropertiesTemplateEnabled" value="False" />
