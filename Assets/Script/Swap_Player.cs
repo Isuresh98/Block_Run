@@ -162,9 +162,10 @@ public class Swap_Player : MonoBehaviour
 
         if (hitCount == 2)
         {
-            hitCount = 2;
+           
             GameOver = true;
             Destroy(gameObject, 2f);
+            hitCount = 2;
         }
 
         if (levelUp == 3)
@@ -212,7 +213,7 @@ public class Swap_Player : MonoBehaviour
         gameManager.Sheild = Shield;
         if (GameOver)
         {
-            
+            hitCount = 2;
             Shield = 0;
             print("Game Over");
             gameState = GameState.GameOver;
