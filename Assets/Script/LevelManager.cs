@@ -16,7 +16,8 @@ public class LevelManager : MonoBehaviour
     {
         // Initialize the number of locked levels
         lockedLevels = totalLevels;
-
+        int nextLevelIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        PlayerPrefs.SetInt("Level" + nextLevelIndex.ToString(), 1);
         // Loop through the level buttons and check if the level is unlocked
         for (int i = 0; i < levelButtons.Length; i++)
         {

@@ -20,7 +20,7 @@ public class Swap_Player : MonoBehaviour
     [SerializeField]
     private float minDistanceForSwipe = 20f;
     
-    private float movementSpeed = 165f;
+    private float movementSpeed = 200f;
     private Rigidbody2D rb;
     private GameManager gameManager;
     private bool End = false;
@@ -160,12 +160,13 @@ public class Swap_Player : MonoBehaviour
             hitCount = 1;
         }
 
-        if (hitCount == 2)
+        if (hitCount >=2)
         {
            
             GameOver = true;
-            Destroy(gameObject, 2f);
             hitCount = 2;
+            Destroy(gameObject, 2f);
+            
         }
 
         if (levelUp == 3)
@@ -249,6 +250,8 @@ public class Swap_Player : MonoBehaviour
         if (gameState == GameState.GameOver)
         {
             // Game over logic
+            hitCount = 2;
+            Shield = 0;
             rb.velocity = Vector2.zero; // Stop player movement
             Destroy(gameObject, 5f);
             gameManager.Menu(menu = false);
