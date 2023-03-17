@@ -251,6 +251,7 @@ public class Swap_Player : MonoBehaviour
         {
             // Game over logic
             hitCount = 2;
+            movementSpeed = 0;
             Shield = 0;
             rb.velocity = Vector2.zero; // Stop player movement
             Destroy(gameObject, 5f);
@@ -260,11 +261,13 @@ public class Swap_Player : MonoBehaviour
             cameraShake.ShakeCamera();
             camColor.ColorAndIntensity();
             IntasitialAds = true;
+
         }
         if (gameState == GameState.Win)
         {
             End =true;
             levelUp = 0;
+            movementSpeed = 0;
             rb.velocity = Vector2.zero; // Stop player movement
             endVFX.SetActive(true);
             Destroy(gameObject,4f);
