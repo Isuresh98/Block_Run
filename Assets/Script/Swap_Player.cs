@@ -3,8 +3,15 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class Swap_Player : MonoBehaviour
 {
+    //new moment Create
+    private bool isMovingRight;
+    private bool isMovingLeft;
+    private bool isMovingUp;
+    private bool isMovingDown;
+
+
     //timer set
-   
+
 
     [SerializeField] private float currentTime; // The current time left
 
@@ -19,8 +26,9 @@ public class Swap_Player : MonoBehaviour
 
     [SerializeField]
     private float minDistanceForSwipe = 20f;
+
     [SerializeField]
-    private float movementSpeed = 200f;
+    private float movementSpeed = 25f;
     private Rigidbody2D rb;
     private GameManager gameManager;
     private bool End = false;
@@ -136,23 +144,10 @@ public class Swap_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //timer
-        currentTime -= Time.deltaTime;
-
-        int timeInt = Mathf.RoundToInt(currentTime);
-        Shield = timeInt;
+        
 
 
-        if (currentTime <= 0f)
-        {
-
-
-            SheldPannel.SetActive(false);
-
-            // Time is up
-            currentTime = 0f;
-
-        }
+        
       
 
         gameManager.Sheild = Shield;
@@ -222,6 +217,7 @@ public class Swap_Player : MonoBehaviour
         {
             Playanim.SetBool("IsSheld", false);
             hitCount = 1;
+            SheldPannel.SetActive(false);
         }
 
         if (hitCount >= 2)
@@ -289,7 +285,7 @@ public class Swap_Player : MonoBehaviour
 
 
     private void FixedUpdate()
-        {
+   {
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -306,6 +302,23 @@ public class Swap_Player : MonoBehaviour
                 DetectSwipe();
             }
         }
+        if (isMovingRight)
+        {
+            transform.Translate(movementSpeed * Time.unscaledDeltaTime, 0, 0);
+        }
+        if (isMovingLeft)
+        {
+            transform.Translate(-movementSpeed * Time.unscaledDeltaTime, 0, 0);
+        }
+        if (isMovingUp)
+        {
+            transform.Translate(0, movementSpeed * Time.unscaledDeltaTime, 0);
+        }
+        if (isMovingDown)
+        {
+            transform.Translate(0, -movementSpeed * Time.unscaledDeltaTime, 0);
+        }
+
 
     }
 
@@ -349,28 +362,34 @@ public class Swap_Player : MonoBehaviour
 
     void MoveRight()
     {
-        rb.velocity = new Vector2(movementSpeed*Time.deltaTime, 0);
-
+        isMovingRight = true;
+        isMovingLeft = false;
+        isMovingUp = false;
+        isMovingDown = false;
         leftTall.SetActive(true);
         rightTall.SetActive(false);
         upTall.SetActive(false);
         dounTall.SetActive(false);
-
     }
 
     void MoveLeft()
     {
-        rb.velocity = new Vector2(-movementSpeed * Time.deltaTime, 0);
+        isMovingRight = false;
+        isMovingLeft = true;
+        isMovingUp = false;
+        isMovingDown = false;
         leftTall.SetActive(false);
         rightTall.SetActive(true);
         upTall.SetActive(false);
         dounTall.SetActive(false);
-
     }
 
     void MoveUp()
     {
-        rb.velocity = new Vector2(0, movementSpeed * Time.deltaTime);
+        isMovingRight = false;
+        isMovingLeft = false;
+        isMovingUp = true;
+        isMovingDown = false;
         leftTall.SetActive(false);
         rightTall.SetActive(false);
         upTall.SetActive(false);
@@ -379,24 +398,34 @@ public class Swap_Player : MonoBehaviour
 
     void MoveDown()
     {
-        rb.velocity = new Vector2(0, -movementSpeed * Time.deltaTime);
+        isMovingRight = false;
+        isMovingLeft = false;
+        isMovingUp = false;
+        isMovingDown = true;
         leftTall.SetActive(false);
         rightTall.SetActive(false);
         upTall.SetActive(true);
         dounTall.SetActive(false);
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             dastVFX.SetActive(true);
-            rb.velocity = Vector2.zero; // Stop movement when finger is lifted off the screen
+           /// rb.velocity = Vector2.zero; // Stop movement when finger is lifted off the screen
             
             HelthUpVFX.SetActive(false);
             DamegeVFX.SetActive(false);
             StarVFX.SetActive(false);
 
+            // Stop moving if the player collides with an object with a collider
+            isMovingRight = false;
+            isMovingLeft = false;
+            isMovingUp = false;
+            isMovingDown = false;
+            print("hit the ground");
         }
 
 
@@ -410,11 +439,16 @@ public class Swap_Player : MonoBehaviour
             
             
         }
+        
+       
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //test add
+       
+
 
         if (collision.gameObject.CompareTag("Path"))
         {
@@ -469,7 +503,7 @@ public class Swap_Player : MonoBehaviour
             Playanim.SetBool("IsSheld", true);
             hitCount = 0;
             SheldPannel.SetActive(true);
-            currentTime = 10f;
+           
             Destroy(collision.gameObject);
 
             HelthUpVFX.SetActive(true);
