@@ -9,6 +9,10 @@ public class Swap_Player : MonoBehaviour
     private bool isMovingUp;
     private bool isMovingDown;
 
+    [SerializeField] 
+    private LayerMask obstacleLayerMask;
+    [SerializeField]
+    private float offsetinstop;
 
     //timer set
 
@@ -302,23 +306,46 @@ public class Swap_Player : MonoBehaviour
                 DetectSwipe();
             }
         }
+
+        Vector3 movement = Vector3.zero;
+
+
         if (isMovingRight)
         {
-            transform.Translate(movementSpeed * Time.unscaledDeltaTime, 0, 0);
+            movement += Vector3.right;
         }
-        if (isMovingLeft)
+        else if (isMovingLeft)
         {
-            transform.Translate(-movementSpeed * Time.unscaledDeltaTime, 0, 0);
-        }
-        if (isMovingUp)
-        {
-            transform.Translate(0, movementSpeed * Time.unscaledDeltaTime, 0);
-        }
-        if (isMovingDown)
-        {
-            transform.Translate(0, -movementSpeed * Time.unscaledDeltaTime, 0);
+            movement += Vector3.left;
         }
 
+        if (isMovingUp)
+        {
+            movement += Vector3.up;
+        }
+        else if (isMovingDown)
+        {
+            movement += Vector3.down;
+        }
+
+
+        if (movement != Vector3.zero)
+        {
+            // Check if there is an obstacle in the direction of movement
+            Collider2D obstacle = Physics2D.OverlapCircle(transform.position + movement, offsetinstop, obstacleLayerMask);
+            if (obstacle == null)
+            {
+                transform.Translate(movement * movementSpeed * Time.unscaledDeltaTime);
+            }
+            else
+            {
+                // Stop moving if there is an obstacle in the way
+                isMovingRight = false;
+                isMovingLeft = false;
+                isMovingUp = false;
+                isMovingDown = false;
+            }
+        }
 
     }
 
