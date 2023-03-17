@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public int Sheild;
     public Text coinText;
     
-    public Text SheildText;
+    
 
    [SerializeField]
     private GameObject Winpannel;
@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         // Display the level coin amount in the LevelcoinText
 
         coinText.text= CoinCollectamount.ToString();
-        SheildText.text = "Sheild: " + Sheild.ToString();
+      
         CoinCollectamount = PlayerPrefs.GetInt("Score", 0);
 
         
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         // Update the level coin amount in the LevelcoinText
       
         coinText.text = CoinCollectamount.ToString();
-        SheildText.text =  Sheild.ToString();
+       
 
       
         

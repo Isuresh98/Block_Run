@@ -19,7 +19,7 @@ public class Swap_Player : MonoBehaviour
 
     [SerializeField]
     private float minDistanceForSwipe = 20f;
-    
+    [SerializeField]
     private float movementSpeed = 200f;
     private Rigidbody2D rb;
     private GameManager gameManager;
@@ -66,7 +66,7 @@ public class Swap_Player : MonoBehaviour
     private AudioSource audioSource;
 
     //adsmanager
-    private AdManager adsmanager;
+    
     public bool IntasitialAds;
     void Start()
     {
@@ -130,7 +130,7 @@ public class Swap_Player : MonoBehaviour
         hitCount = 0;
 
         //adsmanage
-        adsmanager = GameObject.FindGameObjectWithTag("ads").GetComponent<AdManager>();
+       
     }
 
     // Update is called once per frame
@@ -138,35 +138,99 @@ public class Swap_Player : MonoBehaviour
     {
         //timer
         currentTime -= Time.deltaTime;
-        
+
         int timeInt = Mathf.RoundToInt(currentTime);
         Shield = timeInt;
 
 
         if (currentTime <= 0f)
         {
-           
+
 
             SheldPannel.SetActive(false);
 
             // Time is up
             currentTime = 0f;
-          
+
+        }
+      
+
+        gameManager.Sheild = Shield;
+
+        if (GameOver)
+        {
+
+            hitCount = 2;
+            Shield = 0;
+            print("Game Over");
+            gameState = GameState.GameOver;
+
+
+            if (gameoverSound != null)
+            {
+                audioSource.PlayOneShot(gameoverSound);
+            }
+
         }
 
+        if (gameState == GameState.GameOver)
+        {
+            // Game over logic
+            hitCount = 2;
+            movementSpeed = 0;
+            Shield = 0;
+            rb.velocity = Vector2.zero; // Stop player movement
+
+            DamegeVFX.SetActive(true);
+            cameraShake.shakeDuration = 0.7f;
+            cameraShake.ShakeCamera();
+            camColor.ColorAndIntensity();
+            IntasitialAds = true;
+            gameManager.Menu(menu =false);
+
+            Destroy(gameObject, 5f);
+        }
+
+
+        if (levelUp <= 0 && End)
+        {
+            // Load the next level
+            int nextLevelIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+
+            // Set the "Level2" PlayerPrefs value to 1 for the next level
+            PlayerPrefs.SetInt("Level" + nextLevelIndex.ToString(), 1);
+
+            levelUp = 0;
+            print("Game Win");
+            gameState = GameState.Win;
+            if (GameWinSound != null)
+            {
+                audioSource.PlayOneShot(GameWinSound);
+            }
+
+        }
+        UIandOverCountLogic();
+
+        GameWin();
+   
+    }
+
+    private void UIandOverCountLogic()
+    {
         if (hitCount == 1)
         {
             Playanim.SetBool("IsSheld", false);
             hitCount = 1;
         }
 
-        if (hitCount >=2)
+        if (hitCount >= 2)
         {
-           
+
             GameOver = true;
             hitCount = 2;
             Destroy(gameObject, 2f);
-            
+
         }
 
         if (levelUp == 3)
@@ -176,27 +240,27 @@ public class Swap_Player : MonoBehaviour
 
 
         }
-        else if(levelUp == 2)
+        else if (levelUp == 2)
         {
             levelUp = 2;
             gameManager.starCount(1);
-           
+
 
         }
         else if (levelUp == 1)
         {
             levelUp = 1;
             gameManager.starCount(2);
-           
-            
+
+
 
         }
         else if (levelUp == 0)
         {
             levelUp = 0;
             gameManager.starCount(3);
-            
-            
+
+
 
         }
 
@@ -204,81 +268,28 @@ public class Swap_Player : MonoBehaviour
         LevelcoinText2.text = displayLevelCoin.ToString();
 
         LevelcoinText.text = displayLevelCoin.ToString();
+    }
 
-
-        
-       
-
-
-
-        gameManager.Sheild = Shield;
-        if (GameOver)
-        {
-            hitCount = 2;
-            Shield = 0;
-            print("Game Over");
-            gameState = GameState.GameOver;
-           
-           
-            if (gameoverSound != null)
-            {
-                audioSource.PlayOneShot(gameoverSound);
-            }
-           
-        }
-
-        if (levelUp <= 0&&End)
-        {
-            // Load the next level
-            int nextLevelIndex = SceneManager.GetActiveScene().buildIndex + 1;
-           
-
-            // Set the "Level2" PlayerPrefs value to 1 for the next level
-            PlayerPrefs.SetInt("Level" + nextLevelIndex.ToString(), 1);
-           
-            levelUp = 0;
-            print("Game Win");        
-            gameState = GameState.Win;
-            if (GameWinSound != null)
-            {
-                audioSource.PlayOneShot(GameWinSound);
-            }
-
-        }
-
-
-        if (gameState == GameState.GameOver)
-        {
-            // Game over logic
-            hitCount = 2;
-            movementSpeed = 0;
-            Shield = 0;
-            rb.velocity = Vector2.zero; // Stop player movement
-            Destroy(gameObject, 5f);
-            gameManager.Menu(menu = false);
-            DamegeVFX.SetActive(true);
-            cameraShake.shakeDuration = 0.7f;
-            cameraShake.ShakeCamera();
-            camColor.ColorAndIntensity();
-            IntasitialAds = true;
-
-        }
+    private void GameWin()
+    {
         if (gameState == GameState.Win)
         {
-            End =true;
+            End = true;
             levelUp = 0;
             movementSpeed = 0;
             rb.velocity = Vector2.zero; // Stop player movement
             endVFX.SetActive(true);
-            Destroy(gameObject,4f);
-            gameManager.Menu(menu=true);
+            Destroy(gameObject, 4f);
+            gameManager.Menu(menu = true);
             camColor.ColorAndIntensity();
 
 
         }
+    }
 
 
-
+    private void FixedUpdate()
+        {
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -286,21 +297,18 @@ public class Swap_Player : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 fingerDownPosition = touch.position;
-               
-               
-
-
             }
 
             if (touch.phase == TouchPhase.Ended)
             {
                 fingerUpPosition = touch.position;
-                rb.velocity = Vector2.zero; // Stop movement when finger is lifted off the screen
+
                 DetectSwipe();
-               
             }
         }
+
     }
+
 
     void DetectSwipe()
     {
@@ -405,8 +413,6 @@ public class Swap_Player : MonoBehaviour
     }
 
 
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
@@ -475,11 +481,6 @@ public class Swap_Player : MonoBehaviour
         
     }
   
-
-
-   
-
-
 
     public enum GameState
     {
