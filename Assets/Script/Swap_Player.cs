@@ -83,9 +83,9 @@ public class Swap_Player : MonoBehaviour
     void Start()
     {
         IntasitialAds = false;
-      
-      
-      
+
+
+        Vector3 movement = Vector3.zero;
 
         //sound effect
         audioSource = GetComponent<AudioSource>();
