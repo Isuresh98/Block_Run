@@ -3608,7 +3608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.5
+  radius: 0.4
   height: 1
   canMove: 1
   maxSpeed: 3
@@ -3624,15 +3624,15 @@ MonoBehaviour:
   autoRepath:
     mode: 2
     interval: 0.5
-    sensitivity: 19.7
+    sensitivity: 11.8
     maximumInterval: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 2
+  slowdownDistance: 1.5
   pickNextWaypointDist: 0.77
-  endReachedDistance: 1.5
+  endReachedDistance: 1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -3954,7 +3954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.5
+  radius: 0.4
   height: 1
   canMove: 1
   maxSpeed: 3.3
@@ -3970,15 +3970,15 @@ MonoBehaviour:
   autoRepath:
     mode: 2
     interval: 0.5
-    sensitivity: 19.7
+    sensitivity: 11.8
     maximumInterval: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 2
+  slowdownDistance: 1.5
   pickNextWaypointDist: 0.77
-  endReachedDistance: 1.5
+  endReachedDistance: 1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -13356,7 +13356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.5
+  radius: 0.4
   height: 1
   canMove: 1
   maxSpeed: 3.2
@@ -13372,15 +13372,15 @@ MonoBehaviour:
   autoRepath:
     mode: 2
     interval: 0.5
-    sensitivity: 19.7
+    sensitivity: 11.8
     maximumInterval: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 2
+  slowdownDistance: 1.5
   pickNextWaypointDist: 0.77
-  endReachedDistance: 1.5
+  endReachedDistance: 1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -13622,7 +13622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.5
+  radius: 0.4
   height: 1
   canMove: 1
   maxSpeed: 3.1
@@ -13638,15 +13638,15 @@ MonoBehaviour:
   autoRepath:
     mode: 2
     interval: 0.5
-    sensitivity: 19.7
+    sensitivity: 11.8
     maximumInterval: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 2
+  slowdownDistance: 1.5
   pickNextWaypointDist: 0.77
-  endReachedDistance: 1.5
+  endReachedDistance: 1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -14063,6 +14063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24c1b626ffe8874d97cbd66078e83a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vibrationDuration: 0.2
+  vibrationIntensity: 80
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
