@@ -45,7 +45,7 @@ namespace Pathfinding {
 				if (distanceToTarget <= activationDistance && ai.destination != target.position)
                 {
 					{
-						activationDistance = 7f;
+						activationDistance = 40f;
 
 						ai.destination = target.position;
 					}

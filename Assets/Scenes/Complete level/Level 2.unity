@@ -1283,7 +1283,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307979656}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: -13.75, z: 0}
+  m_LocalPosition: {x: -5, y: -13.75, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 533162006}
@@ -1382,7 +1382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328868436}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: -12.25, z: 0}
+  m_LocalPosition: {x: -2.25, y: -12.25, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 533162006}
@@ -1787,7 +1787,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499159807}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -38.75, y: -12.75, z: 0}
+  m_LocalPosition: {x: -38.75, y: -12.25, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 533162006}
@@ -3592,7 +3592,7 @@ MonoBehaviour:
   radius: 0.5
   height: 1
   canMove: 1
-  maxSpeed: 7
+  maxSpeed: 4
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -12172,7 +12172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384846812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.75, y: -4.5, z: 0}
+  m_LocalPosition: {x: -11.75, y: -3.25, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 533162006}
@@ -12762,7 +12762,7 @@ MonoBehaviour:
   radius: 0.5
   height: 1
   canMove: 1
-  maxSpeed: 7
+  maxSpeed: 4.5
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -13200,6 +13200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24c1b626ffe8874d97cbd66078e83a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vibrationDuration: 0.2
+  vibrationIntensity: 80
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -13208,7 +13210,6 @@ MonoBehaviour:
   Shield: 0
   levelUp: 3
   minDistanceForSwipe: 20
-  movementSpeed: 55
   gameState: 0
   LevelcoinText: {fileID: 1549996611192083478}
   LevelcoinText2: {fileID: 1284266376}
@@ -47456,6 +47457,14 @@ PrefabInstance:
     - target: {fileID: 9065901291937436266, guid: e3a5f77b7fcd0ad44a85c7e5c6cc55ee, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065901291937436309, guid: e3a5f77b7fcd0ad44a85c7e5c6cc55ee, type: 3}
+      propertyPath: shakeAmount
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065901291937436309, guid: e3a5f77b7fcd0ad44a85c7e5c6cc55ee, type: 3}
+      propertyPath: shakeDuration
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 9065901291937436310, guid: e3a5f77b7fcd0ad44a85c7e5c6cc55ee, type: 3}
       propertyPath: m_RootOrder

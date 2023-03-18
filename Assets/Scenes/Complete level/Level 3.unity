@@ -567,7 +567,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142455621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -31.75, y: -1.5, z: 0}
+  m_LocalPosition: {x: -32.25, y: 0.5, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 533162006}
@@ -3594,7 +3594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
-  activationDistance: 2.5
+  activationDistance: 2
 --- !u!114 &1022630111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3611,7 +3611,7 @@ MonoBehaviour:
   radius: 0.5
   height: 1
   canMove: 1
-  maxSpeed: 7
+  maxSpeed: 3
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -3940,7 +3940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
-  activationDistance: 2.5
+  activationDistance: 2
 --- !u!114 &1079035674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3957,7 +3957,7 @@ MonoBehaviour:
   radius: 0.5
   height: 1
   canMove: 1
-  maxSpeed: 7
+  maxSpeed: 3.3
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -4270,7 +4270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119668819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32, y: -5, z: 22}
+  m_LocalPosition: {x: -32.25, y: -7.25, z: 22}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 492657592}
@@ -13195,7 +13195,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466763467}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -31, y: -3.5, z: 0}
+  m_LocalPosition: {x: -30.75, y: -3.5, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 533162006}
@@ -13342,7 +13342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
-  activationDistance: 2.5
+  activationDistance: 2
 --- !u!114 &1585532782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13359,7 +13359,7 @@ MonoBehaviour:
   radius: 0.5
   height: 1
   canMove: 1
-  maxSpeed: 7
+  maxSpeed: 3.2
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -13608,7 +13608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
-  activationDistance: 2.5
+  activationDistance: 2
 --- !u!114 &1699012021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13625,7 +13625,7 @@ MonoBehaviour:
   radius: 0.5
   height: 1
   canMove: 1
-  maxSpeed: 7
+  maxSpeed: 3.1
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -14071,7 +14071,6 @@ MonoBehaviour:
   Shield: 0
   levelUp: 3
   minDistanceForSwipe: 20
-  movementSpeed: 55
   gameState: 0
   LevelcoinText: {fileID: 1549996611192083478}
   LevelcoinText2: {fileID: 1284266376}

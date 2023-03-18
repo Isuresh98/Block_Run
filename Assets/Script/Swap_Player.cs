@@ -3,6 +3,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class Swap_Player : MonoBehaviour
 {
+    // Vibration settings
+    public float vibrationDuration = 0.2f;
+    public int vibrationIntensity = 80;
+
     //new moment Create
     private bool isMovingRight;
     private bool isMovingLeft;
@@ -31,8 +35,8 @@ public class Swap_Player : MonoBehaviour
     [SerializeField]
     private float minDistanceForSwipe = 20f;
 
-    [SerializeField]
-    private float movementSpeed = 25f;
+   
+    private float movementSpeed = 40f;
     private Rigidbody2D rb;
     private GameManager gameManager;
     private bool End = false;
@@ -80,10 +84,11 @@ public class Swap_Player : MonoBehaviour
     //adsmanager
     
     public bool IntasitialAds;
+     bool GameWintru;
     void Start()
     {
         IntasitialAds = false;
-
+        GameWintru = false;
 
         Vector3 movement = Vector3.zero;
 
@@ -156,7 +161,7 @@ public class Swap_Player : MonoBehaviour
 
         gameManager.Sheild = Shield;
 
-        if (GameOver)
+        if (GameOver && GameWintru==false)
         {
 
             hitCount = 2;
@@ -274,6 +279,7 @@ public class Swap_Player : MonoBehaviour
     {
         if (gameState == GameState.Win)
         {
+            GameWintru = true;
             End = true;
             levelUp = 0;
             movementSpeed = 0;
@@ -470,7 +476,11 @@ public class Swap_Player : MonoBehaviour
        
     }
 
-
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(0, 10, 100, 32), "Vibrate!"))
+            Handheld.Vibrate();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //test add
@@ -489,7 +499,8 @@ public class Swap_Player : MonoBehaviour
             audioSource.PlayOneShot(StarHitSound);
             Destroy(collision.gameObject);
             StarVFX.SetActive(true);
-      
+            // Vibrate the phone
+            Handheld.Vibrate();
         }
 
         if (collision.gameObject.CompareTag("coin"))
