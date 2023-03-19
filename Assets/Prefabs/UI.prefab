@@ -4049,10 +4049,22 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: f6ea4865d96f34b40a05fc4292f7e85f, type: 3}
+    - target: {fileID: 5600583394814011862, guid: ff3aef650112af14eb1743f3e752dfbc, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5600583394870419653, guid: ff3aef650112af14eb1743f3e752dfbc, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: f6ea4865d96f34b40a05fc4292f7e85f, type: 3}
+    - target: {fileID: 5600583395166176528, guid: ff3aef650112af14eb1743f3e752dfbc, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600583395196982125, guid: ff3aef650112af14eb1743f3e752dfbc, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5600583395348858322, guid: ff3aef650112af14eb1743f3e752dfbc, type: 3}
       propertyPath: m_Name
       value: 'GameOver Menu '
@@ -4590,11 +4602,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1914987394749295376, guid: eb3705a8d2a483b4cb7942f2edf9af70, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 86.52652
+      value: 86.52661
       objectReference: {fileID: 0}
     - target: {fileID: 1914987394749295376, guid: eb3705a8d2a483b4cb7942f2edf9af70, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -164.7868
+      value: -164.78687
       objectReference: {fileID: 0}
     - target: {fileID: 1914987394749295376, guid: eb3705a8d2a483b4cb7942f2edf9af70, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -3,9 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class Swap_Player : MonoBehaviour
 {
-    // Vibration settings
-    public float vibrationDuration = 0.2f;
-    public int vibrationIntensity = 80;
+    
 
     //new moment Create
     private bool isMovingRight;
@@ -13,22 +11,13 @@ public class Swap_Player : MonoBehaviour
     private bool isMovingUp;
     private bool isMovingDown;
 
-    
-
-
 
     [SerializeField] 
     private LayerMask obstacleLayerMask;
     [SerializeField]
     private float offsetinstop;
 
-    //timer set
-
-
-    [SerializeField] private float currentTime; // The current time left
-
     private GameObject SheldPannel;
-
 
     public int Shield;
     public int levelUp = 3;
@@ -61,10 +50,7 @@ public class Swap_Player : MonoBehaviour
 
     //animation
 
-    private GameObject upTall;
-    private GameObject dounTall;
-    private GameObject leftTall;
-    private GameObject rightTall;
+
 
     private Animator Playanim;
 
@@ -119,14 +105,10 @@ public class Swap_Player : MonoBehaviour
         camColor = GameObject.FindGameObjectWithTag("PosVolum").GetComponent<CamColorChange>();
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        
-        //Animation
-        upTall = GameObject.FindGameObjectWithTag("UpTall");
-        dounTall = GameObject.FindGameObjectWithTag("DounTall");
-        leftTall = GameObject.FindGameObjectWithTag("LeftTall");
-        leftTall = GameObject.FindGameObjectWithTag("LeftTall");
-        rightTall = GameObject.FindGameObjectWithTag("RightTall");
+
         SheldPannel = GameObject.FindGameObjectWithTag("SheldP");
+        //Animation
+
 
 
 
@@ -146,10 +128,7 @@ public class Swap_Player : MonoBehaviour
         HelthUpVFX.SetActive(false);
 
         //animation
-        leftTall.SetActive(false);
-        rightTall.SetActive(false);
-        upTall.SetActive(false);
-        dounTall.SetActive(false);
+       
 
         SheldPannel.SetActive(false);
         GameOver = false;
@@ -231,9 +210,10 @@ public class Swap_Player : MonoBehaviour
     {
         if (hitCount == 1)
         {
+            SheldPannel.SetActive(false);
             Playanim.SetBool("IsSheld", false);
             hitCount = 1;
-            SheldPannel.SetActive(false);
+            
         }
 
         if (hitCount >= 2)
@@ -474,11 +454,7 @@ public class Swap_Player : MonoBehaviour
        
     }
 
-    void OnGUI()
-    {
-        if (GUI.Button(new Rect(0, 10, 100, 32), "Vibrate!"))
-            Handheld.Vibrate();
-    }
+   
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //test add
@@ -497,8 +473,7 @@ public class Swap_Player : MonoBehaviour
             audioSource.PlayOneShot(StarHitSound);
             Destroy(collision.gameObject);
             StarVFX.SetActive(true);
-            // Vibrate the phone
-            Handheld.Vibrate();
+            
         }
 
         if (collision.gameObject.CompareTag("coin"))
@@ -524,11 +499,12 @@ public class Swap_Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("EnemyFollow"))
         {
+            hitCount++;
             audioSource.PlayOneShot(EnemyHitSound);
             Playanim.SetBool("IsSheld", false);
             
             DamegeVFX.SetActive(true);
-            hitCount++;
+            
             
 
         }
