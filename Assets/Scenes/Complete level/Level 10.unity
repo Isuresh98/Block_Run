@@ -5080,22 +5080,8 @@ CompositeCollider2D:
         Y: -143000100
       - X: 233999900
         Y: -143000100
-    - - X: 116999959
-        Y: -130000100
-      - X: 116999900
-        Y: -130000041
-      - X: 116999900
-        Y: -104000100
-      - X: 117000033
-        Y: -104000100
-      - X: 117000092
-        Y: -104000041
-      - X: 117000092
-        Y: -103999908
-      - X: 130000033
-        Y: -103999908
-      - X: 130000092
-        Y: -103999967
+    - - X: 130000092
+        Y: -129999900
       - X: 130000092
         Y: -77999959
       - X: 130000033
@@ -5558,12 +5544,6 @@ CompositeCollider2D:
         Y: -91000092
       - X: 233999900
         Y: -129999900
-      - X: 130000092
-        Y: -129999900
-      - X: 130000092
-        Y: -130000041
-      - X: 130000033
-        Y: -130000100
     - - X: 130000092
         Y: 52000041
       - X: 130000033
@@ -5763,14 +5743,7 @@ CompositeCollider2D:
       - {x: 10.39999, y: -14.300005}
       - {x: 10.399996, y: -14.30001}
       - {x: 23.39999, y: -14.30001}
-    - - {x: 11.699996, y: -13.00001}
-      - {x: 11.69999, y: -13.000004}
-      - {x: 11.69999, y: -10.40001}
-      - {x: 11.700004, y: -10.40001}
-      - {x: 11.700009, y: -10.400004}
-      - {x: 11.700009, y: -10.39999}
-      - {x: 13.000004, y: -10.39999}
-      - {x: 13.00001, y: -10.399997}
+    - - {x: 13.00001, y: -12.99999}
       - {x: 13.00001, y: -7.799996}
       - {x: 13.000004, y: -7.7999907}
       - {x: 10.400008, y: -7.7999907}
@@ -6002,9 +5975,6 @@ CompositeCollider2D:
       - {x: 23.400003, y: -9.10001}
       - {x: 23.39999, y: -9.10001}
       - {x: 23.39999, y: -12.99999}
-      - {x: 13.00001, y: -12.99999}
-      - {x: 13.00001, y: -13.000004}
-      - {x: 13.000004, y: -13.00001}
     - - {x: 13.00001, y: 5.200004}
       - {x: 13.000004, y: 5.20001}
       - {x: 11.699996, y: 5.20001}
@@ -6347,6 +6317,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 3221225439
+  - first: {x: 9, y: -10, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 2
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 3221225439
   - first: {x: 18, y: -10, z: 0}
     second:
       serializedVersion: 2
@@ -6388,6 +6368,16 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 3221225439
   - first: {x: 8, y: -9, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 2
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 3221225439
+  - first: {x: 9, y: -9, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 1
@@ -9051,14 +9041,14 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 289
+  - m_RefCount: 291
     m_Data: {fileID: 11400000, guid: 63d94dfd4aefb9e4e8b17189eb064af2, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 289
+  - m_RefCount: 291
     m_Data: {fileID: 21300000, guid: ef6832689e5a61c4685e248f566ec445, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 0
@@ -9079,7 +9069,7 @@ Tilemap:
       e31: 7.34684e-40
       e32: 1.95e-43
       e33: 1
-  - m_RefCount: 289
+  - m_RefCount: 291
     m_Data:
       e00: 1
       e01: 0
@@ -9102,7 +9092,7 @@ Tilemap:
     m_Data: {r: 3.1056e-41, g: 3.1056e-41, b: 3.1056e-41, a: 3.1056e-41}
   - m_RefCount: 0
     m_Data: {r: 3.1577e-41, g: 3.1577e-41, b: 3.1577e-41, a: 3.1577e-41}
-  - m_RefCount: 289
+  - m_RefCount: 291
     m_Data: {r: 0.12156862, g: 0.71959925, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -17048,13 +17038,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24c1b626ffe8874d97cbd66078e83a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vibrationDuration: 0.2
-  vibrationIntensity: 80
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
   offsetinstop: 0.0001
-  currentTime: 0
   Shield: 0
   levelUp: 3
   minDistanceForSwipe: 20
@@ -17072,6 +17059,7 @@ MonoBehaviour:
   SheldHitSound: {fileID: 8300000, guid: dfbb1dcabf47d5a4495c11c24141c7e2, type: 3}
   BGSound: {fileID: 8300000, guid: b9154d0c7c2ecb248a0c732e2760ddef, type: 3}
   IntasitialAds: 0
+  vibrateLimit: 3
 --- !u!95 &1795706476
 Animator:
   serializedVersion: 5

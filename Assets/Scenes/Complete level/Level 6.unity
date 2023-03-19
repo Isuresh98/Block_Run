@@ -5308,13 +5308,13 @@ CompositeCollider2D:
       - X: -416000100
         Y: -182000084
       - X: -416000100
-        Y: -208000041
+        Y: -221000025
       - X: -416000041
-        Y: -208000100
+        Y: -221000084
       - X: -402999927
-        Y: -208000100
+        Y: -221000084
       - X: -402999868
-        Y: -208000041
+        Y: -221000025
       - X: -402999868
         Y: -182000084
       - X: -403000041
@@ -5436,16 +5436,14 @@ CompositeCollider2D:
       - X: -64999896
         Y: -272999900
       - X: -64999896
-        Y: -259999959
+        Y: -273000041
       - X: -64999955
-        Y: -259999900
-      - X: -77999959
-        Y: -259999900
-      - X: -77999900
-        Y: -259999959
-      - X: -77999900
-        Y: -272999959
-      - X: -77999959
+        Y: -273000100
+      - X: -91000033
+        Y: -273000100
+      - X: -91000092
+        Y: -273000041
+      - X: -91000092
         Y: -272999900
       - X: -142999900
         Y: -272999900
@@ -6105,10 +6103,10 @@ CompositeCollider2D:
       - {x: -42.900005, y: -18.200003}
       - {x: -42.9, y: -18.200008}
       - {x: -41.60001, y: -18.200008}
-      - {x: -41.60001, y: -20.800005}
-      - {x: -41.600002, y: -20.80001}
-      - {x: -40.299995, y: -20.80001}
-      - {x: -40.299988, y: -20.800005}
+      - {x: -41.60001, y: -22.100004}
+      - {x: -41.600002, y: -22.100008}
+      - {x: -40.299995, y: -22.100008}
+      - {x: -40.299988, y: -22.100004}
       - {x: -40.299988, y: -18.200008}
       - {x: -40.300003, y: -18.200008}
       - {x: -40.30001, y: -18.200003}
@@ -6169,12 +6167,11 @@ CompositeCollider2D:
       - {x: -5.20001, y: -22.100008}
       - {x: -5.20001, y: -27.299992}
       - {x: -6.4999895, y: -27.299992}
-      - {x: -6.4999895, y: -25.999996}
-      - {x: -6.4999957, y: -25.99999}
-      - {x: -7.799996, y: -25.99999}
-      - {x: -7.7999907, y: -25.999996}
-      - {x: -7.7999907, y: -27.299997}
-      - {x: -7.799996, y: -27.299992}
+      - {x: -6.4999895, y: -27.300003}
+      - {x: -6.4999957, y: -27.30001}
+      - {x: -9.100003, y: -27.30001}
+      - {x: -9.10001, y: -27.300003}
+      - {x: -9.10001, y: -27.299992}
       - {x: -14.299991, y: -27.299992}
       - {x: -14.299991, y: -25.999996}
       - {x: -14.299995, y: -25.99999}
@@ -6820,16 +6817,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 3221225439
-  - first: {x: -6, y: -21, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 2
-      m_TileMatrixIndex: 1
-      m_TileColorIndex: 2
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 3221225439
   - first: {x: -4, y: -21, z: 0}
     second:
       serializedVersion: 2
@@ -7291,6 +7278,16 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 3221225439
   - first: {x: -35, y: -17, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 2
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 3221225439
+  - first: {x: -32, y: -17, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 1
@@ -17586,6 +17583,7 @@ MonoBehaviour:
   SheldHitSound: {fileID: 8300000, guid: dfbb1dcabf47d5a4495c11c24141c7e2, type: 3}
   BGSound: {fileID: 8300000, guid: b9154d0c7c2ecb248a0c732e2760ddef, type: 3}
   IntasitialAds: 0
+  vibrateLimit: 3
 --- !u!95 &1795706476
 Animator:
   serializedVersion: 5

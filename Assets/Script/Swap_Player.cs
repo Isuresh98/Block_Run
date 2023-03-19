@@ -484,7 +484,7 @@ public class Swap_Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Star"))
         {
             levelUp -= 1;
-            Vibration.Vibrate(500);
+            Vibration.Vibrate(50);
            
             audioSource.PlayOneShot(StarHitSound);
             Destroy(collision.gameObject);
