@@ -114,50 +114,41 @@ public class GameManager : MonoBehaviour
         Debug.Log("PlayerPrefs cleared.");
     }
 
-    public void starCount(int StarCount)
+    public void starCount(int starCount)
     {
-       
-        if (StarCount == 0)
-        {
-            star1.SetActive(false);
-            star2.SetActive(false);
-            star3.SetActive(false);
+        // Deactivate all stars first
+        star1.SetActive(false);
+        star2.SetActive(false);
+        star3.SetActive(false);
 
-            star1_2.SetActive(false);
-            star2_2.SetActive(false);
-            star3_2.SetActive(false);
-        }
-        if (StarCount == 1)
-        {
-            star1.SetActive(true);
-            star2.SetActive(false);
-            star3.SetActive(false);
+        star1_2.SetActive(false);
+        star2_2.SetActive(false);
+        star3_2.SetActive(false);
 
-            star1_2.SetActive(true);
-            star2_2.SetActive(false);
-            star3_2.SetActive(false);
-        }
-        if (StarCount == 2)
+        // Activate stars based on starCount
+        switch (starCount)
         {
-            star1.SetActive(true);
-            star2.SetActive(true);
-            star3.SetActive(false);
-
-            star1_2.SetActive(true);
-            star2_2.SetActive(true);
-            star3_2.SetActive(false);
-        }
-        if (StarCount == 3)
-        {
-            star1.SetActive(true);
-            star2.SetActive(true);
-            star3.SetActive(true);
-
-            star1_2.SetActive(true);
-            star2_2.SetActive(true);
-            star3_2.SetActive(true);
+            case 1:
+                star1.SetActive(true);
+                star1_2.SetActive(true);
+                break;
+            case 2:
+                star1.SetActive(true);
+                star2.SetActive(true);
+                star1_2.SetActive(true);
+                star2_2.SetActive(true);
+                break;
+            case 3:
+                star1.SetActive(true);
+                star2.SetActive(true);
+                star3.SetActive(true);
+                star1_2.SetActive(true);
+                star2_2.SetActive(true);
+                star3_2.SetActive(true);
+                break;
         }
     }
+
 
     public void nextLoad()
     {

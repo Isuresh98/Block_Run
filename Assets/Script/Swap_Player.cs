@@ -120,14 +120,13 @@ public class Swap_Player : MonoBehaviour
 
         DamegeVFX = GameObject.FindGameObjectWithTag("DamageVFX");
         dastVFX = GameObject.FindGameObjectWithTag("dastVFX");
-        StarVFX = GameObject.FindGameObjectWithTag("StarVFX");
+       
         HelthUpVFX = GameObject.FindGameObjectWithTag("HelthUpVFX");
         endVFX = GameObject.FindGameObjectWithTag("End");
         dastVFX.SetActive(false);
         endVFX.SetActive(false);
         DamegeVFX.SetActive(false);
-        StarVFX.SetActive(false);
-
+        
 
         LevelcoinText.text = displayLevelCoin.ToString();
         LevelcoinText2.text = displayLevelCoin.ToString();
@@ -148,28 +147,31 @@ public class Swap_Player : MonoBehaviour
 
 
     // Update is called once per frame
+    // This function updates the game state and handles game over and game win logic
     void Update()
     {
-
-
+        // Update the Shield variable in the game manager
         gameManager.Sheild = Shield;
 
-        if (GameOver && GameWintru==false)
+        // Check if the game is over and the player hasn't won yet
+        if (GameOver && GameWintru == false)
         {
-
+            // Reset the hit count and shield
             hitCount = 2;
             Shield = 0;
-            print("Game Over");
+
+            // Set the game state to GameOver
             gameState = GameState.GameOver;
+            print("Game Over");
 
-
+            // Play the game over sound if it's not null
             if (gameoverSound != null)
             {
                 audioSource.PlayOneShot(gameoverSound);
             }
-
         }
 
+        // Check if the game state is GameOver
         if (gameState == GameState.GameOver)
         {
             // Game over logic
@@ -178,14 +180,19 @@ public class Swap_Player : MonoBehaviour
             Shield = 0;
             rb.velocity = Vector2.zero; // Stop player movement
 
+            // Show the damage VFX and shake the camera
             DamegeVFX.SetActive(true);
             cameraShake.shakeDuration = 0.7f;
             cameraShake.ShakeCamera();
             camColor.ColorAndIntensity();
-            IntasitialAds = true;
-            gameManager.Menu(menu =false);
 
+            // Set the Interstitial Ads flag to true and hide the menu
+            IntasitialAds = true;
+            gameManager.Menu(menu = false);
+
+            // Destroy the player game object after 5 seconds
             Destroy(gameObject, 5f);
+
             // Check if the vibration limit has been reached
             if (vibrateCounter < vibrateLimit)
             {
@@ -197,32 +204,41 @@ public class Swap_Player : MonoBehaviour
             }
         }
 
-
+        // Check if the level up counter has reached 0 and the game has ended
         if (levelUp <= 0 && End)
         {
             // Load the next level
             int nextLevelIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
-
             // Set the "Level2" PlayerPrefs value to 1 for the next level
             PlayerPrefs.SetInt("Level" + nextLevelIndex.ToString(), 1);
 
+            // Reset the level up counter and set the game state to Win
             levelUp = 0;
-            print("Game Win");
             gameState = GameState.Win;
+            print("Game Win");
+
+            // Play the game win sound if it's not null
             if (GameWinSound != null)
             {
                 audioSource.PlayOneShot(GameWinSound);
             }
-
         }
+
+        // Call the UI and game over count logic functions
         UIandOverCountLogic();
-
         GameWin();
-   
-    }
 
-    private void UIandOverCountLogic()
+
+        //movement add
+       
+    
+
+}//end 
+
+
+// This method handles UI and game over logic
+private void UIandOverCountLogic()
     {
         if (hitCount == 1)
         {
@@ -231,70 +247,60 @@ public class Swap_Player : MonoBehaviour
             hitCount = 1;
             
         }
-
+        // If the player has no more hits remaining, trigger the game over state
         if (hitCount >= 2)
         {
-
             GameOver = true;
             hitCount = 2;
             Destroy(gameObject, 2f);
-
         }
 
-        if (levelUp == 3)
+
+        // Update the number of stars the player has earned based on the level up variable
+        switch (levelUp)
         {
-            levelUp = 3;
-            gameManager.starCount(0);
-
-
-        }
-        else if (levelUp == 2)
-        {
-            levelUp = 2;
-            gameManager.starCount(1);
-
-
-        }
-        else if (levelUp == 1)
-        {
-            levelUp = 1;
-            gameManager.starCount(2);
-
-
-
-        }
-        else if (levelUp == 0)
-        {
-            levelUp = 0;
-            gameManager.starCount(3);
-
-
-
+            case 3:
+                gameManager.starCount(0);
+                break;
+            case 2:
+                gameManager.starCount(1);
+                break;
+            case 1:
+                gameManager.starCount(2);
+                break;
+            case 0:
+                gameManager.starCount(3);
+                break;
         }
 
-
+        // Update the displayed level coin count
         LevelcoinText2.text = displayLevelCoin.ToString();
-
         LevelcoinText.text = displayLevelCoin.ToString();
     }
 
     private void GameWin()
     {
+        // Check if the game state is set to Win
         if (gameState == GameState.Win)
         {
+            // Set the GameWintru and End flags to true
             GameWintru = true;
             End = true;
-            levelUp = 0;
+
+            // Stop the player movement
             movementSpeed = 0;
-            rb.velocity = Vector2.zero; // Stop player movement
+            rb.velocity = Vector2.zero;
+
+            // Play end VFX and destroy the player game object after 4 seconds
             endVFX.SetActive(true);
             Destroy(gameObject, 4f);
+
+            // Show the menu and change camera color
             gameManager.Menu(menu = true);
             camColor.ColorAndIntensity();
-
-
         }
     }
+
     public void thochGet()
     {
         if (Input.touchCount > 0)
@@ -357,28 +363,80 @@ public class Swap_Player : MonoBehaviour
 
     private void FixedUpdate()
    {
-        thochGet();
+        // thochGet();
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                fingerDownPosition = touch.position;
+            }
+
+            if (touch.phase == TouchPhase.Ended)
+            {
+                fingerUpPosition = touch.position;
+                DetectSwipe();
+            }
+        }
+
+        Vector3 movement = Vector3.zero;
+
+        if (isMovingRight)
+        {
+            movement += Vector3.right;
+        }
+        else if (isMovingLeft)
+        {
+            movement += Vector3.left;
+        }
+
+        if (isMovingUp)
+        {
+            movement += Vector3.up;
+        }
+        else if (isMovingDown)
+        {
+            movement += Vector3.down;
+        }
+
+        if (movement != Vector3.zero)
+        {
+            // Check if there is an obstacle in the direction of movement
+            Collider2D obstacle = Physics2D.OverlapCircle(transform.position + movement, offsetinstop, obstacleLayerMask);
+
+            if (obstacle == null)
+            {
+                transform.Translate(movement * movementSpeed * Time.unscaledDeltaTime);
+            }
+            else
+            {
+                // Stop moving if there is an obstacle in the way
+                isMovingRight = false;
+                isMovingLeft = false;
+                isMovingUp = false;
+                isMovingDown = false;
+            }
+        }
 
     }
 
 
-    void DetectSwipe()
+    private void DetectSwipe()
     {
         if (Vector2.Distance(fingerDownPosition, fingerUpPosition) > minDistanceForSwipe)
         {
             Vector2 direction = fingerUpPosition - fingerDownPosition;
+
             if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             {
                 if (direction.x > 0)
                 {
                     MoveRight();
-                    
                 }
                 else
                 {
                     MoveLeft();
-                 
-
                 }
             }
             else
@@ -386,18 +444,15 @@ public class Swap_Player : MonoBehaviour
                 if (direction.y > 0)
                 {
                     MoveUp();
-                   
-
                 }
                 else
                 {
                     MoveDown();
-                    
-
                 }
             }
         }
     }
+
 
     void MoveRight()
     {
@@ -445,7 +500,7 @@ public class Swap_Player : MonoBehaviour
             
             HelthUpVFX.SetActive(false);
             DamegeVFX.SetActive(false);
-            StarVFX.SetActive(false);
+           
 
             // Stop moving if the player collides with an object with a collider
             isMovingRight = false;
@@ -489,8 +544,7 @@ public class Swap_Player : MonoBehaviour
            
             audioSource.PlayOneShot(StarHitSound);
             Destroy(collision.gameObject);
-            StarVFX.SetActive(true);
-            
+         
         }
 
         if (collision.gameObject.CompareTag("coin"))
