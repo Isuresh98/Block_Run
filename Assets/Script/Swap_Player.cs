@@ -72,9 +72,14 @@ public class Swap_Player : MonoBehaviour
     private AudioSource audioSource;
 
     //adsmanager
-    
     public bool IntasitialAds;
      bool GameWintru;
+
+    //vibration set
+    public int vibrateLimit = 3; // Set the limit for number of vibrations
+    private int vibrateCounter = 0; // Keep track of number of vibrations
+
+
     void Start()
     {
         IntasitialAds = false;
@@ -140,6 +145,7 @@ public class Swap_Player : MonoBehaviour
        
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -179,6 +185,15 @@ public class Swap_Player : MonoBehaviour
             gameManager.Menu(menu =false);
 
             Destroy(gameObject, 5f);
+            // Check if the vibration limit has been reached
+            if (vibrateCounter < vibrateLimit)
+            {
+                // Call the Vibrate function from the Vibration class
+                Vibration.Vibrate();
+
+                // Increment the vibration counter
+                vibrateCounter++;
+            }
         }
 
 
@@ -453,8 +468,8 @@ public class Swap_Player : MonoBehaviour
         
        
     }
-
    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //test add
@@ -469,7 +484,8 @@ public class Swap_Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Star"))
         {
             levelUp -= 1;
-            cameraShake.ShakeCamera();
+            Vibration.Vibrate(500);
+           
             audioSource.PlayOneShot(StarHitSound);
             Destroy(collision.gameObject);
             StarVFX.SetActive(true);

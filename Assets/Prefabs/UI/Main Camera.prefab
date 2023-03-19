@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b05608c335a4aec44b1c897aaab97a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTime: 0.01
-  offset: {x: 0, y: 0, z: -17}
+  smoothTime: 0.135
+  offset: {x: 0, y: 2.55, z: -18}
 --- !u!114 &9065901291937436311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2248362313d9d6f44bfe4193cbaca0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeAmount: 5
-  shakeDuration: 0.1
+  shakeAmount: 0
+  shakeDuration: 0
   returnSpeed: 0
