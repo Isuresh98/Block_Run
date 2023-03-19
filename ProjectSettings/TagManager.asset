@@ -37,18 +37,19 @@ TagManager:
   - Path
   - PosVolum
   - ads
+  - StartPoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Forground
+  - 
   - Water
   - UI
   - background
   - grid
   - 
   - 
-  - 
+  - Forground
   - 
   - PostProses
   - 

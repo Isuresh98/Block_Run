@@ -13,6 +13,10 @@ public class Swap_Player : MonoBehaviour
     private bool isMovingUp;
     private bool isMovingDown;
 
+    
+
+
+
     [SerializeField] 
     private LayerMask obstacleLayerMask;
     [SerializeField]
@@ -90,10 +94,17 @@ public class Swap_Player : MonoBehaviour
         IntasitialAds = false;
         GameWintru = false;
 
-        Vector3 movement = Vector3.zero;
+        if (Input.touchCount > 0)
+        {
+            isMovingRight = false;
+            isMovingLeft = false;
+            isMovingUp = false;
+            isMovingDown = false;
 
-        //sound effect
-        audioSource = GetComponent<AudioSource>();
+        }
+
+            //sound effect
+            audioSource = GetComponent<AudioSource>();
         audioSource.clip = BGSound;
         audioSource.loop = true;
         audioSource.Play();
@@ -108,7 +119,7 @@ public class Swap_Player : MonoBehaviour
         camColor = GameObject.FindGameObjectWithTag("PosVolum").GetComponent<CamColorChange>();
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-
+        
         //Animation
         upTall = GameObject.FindGameObjectWithTag("UpTall");
         dounTall = GameObject.FindGameObjectWithTag("DounTall");
@@ -153,11 +164,7 @@ public class Swap_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
-
-        
-      
 
         gameManager.Sheild = Shield;
 
@@ -292,10 +299,8 @@ public class Swap_Player : MonoBehaviour
 
         }
     }
-
-
-    private void FixedUpdate()
-   {
+    public void thochGet()
+    {
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -352,6 +357,11 @@ public class Swap_Player : MonoBehaviour
                 isMovingDown = false;
             }
         }
+    }
+
+    private void FixedUpdate()
+   {
+        thochGet();
 
     }
 
@@ -399,10 +409,7 @@ public class Swap_Player : MonoBehaviour
         isMovingLeft = false;
         isMovingUp = false;
         isMovingDown = false;
-        leftTall.SetActive(true);
-        rightTall.SetActive(false);
-        upTall.SetActive(false);
-        dounTall.SetActive(false);
+        
     }
 
     void MoveLeft()
@@ -411,10 +418,7 @@ public class Swap_Player : MonoBehaviour
         isMovingLeft = true;
         isMovingUp = false;
         isMovingDown = false;
-        leftTall.SetActive(false);
-        rightTall.SetActive(true);
-        upTall.SetActive(false);
-        dounTall.SetActive(false);
+      
     }
 
     void MoveUp()
@@ -423,10 +427,7 @@ public class Swap_Player : MonoBehaviour
         isMovingLeft = false;
         isMovingUp = true;
         isMovingDown = false;
-        leftTall.SetActive(false);
-        rightTall.SetActive(false);
-        upTall.SetActive(false);
-        dounTall.SetActive(true);
+       
     }
 
     void MoveDown()
@@ -435,10 +436,7 @@ public class Swap_Player : MonoBehaviour
         isMovingLeft = false;
         isMovingUp = false;
         isMovingDown = true;
-        leftTall.SetActive(false);
-        rightTall.SetActive(false);
-        upTall.SetActive(true);
-        dounTall.SetActive(false);
+       
     }
 
 
