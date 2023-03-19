@@ -44,7 +44,7 @@ public class Swap_Player : MonoBehaviour
     public Text LevelcoinText;
     public Text LevelcoinText2;
 
-    private GameObject HelthUpVFX;
+
     private GameObject DamegeVFX;
     private GameObject StarVFX;
 
@@ -92,47 +92,71 @@ public class Swap_Player : MonoBehaviour
             isMovingLeft = false;
             isMovingUp = false;
             isMovingDown = false;
-
         }
 
-            //sound effect
-            audioSource = GetComponent<AudioSource>();
-        audioSource.clip = BGSound;
-        audioSource.loop = true;
-        audioSource.Play();
-
+        //sound effect
+        audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+        audioSource.clip = BGSound;
+        audioSource.loop = true;
+        audioSource.Play();
 
         Playanim = GetComponent<Animator>();
+        if (Playanim == null)
+        {
+            Debug.LogError("Animator component is missing.");
+        }
         cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
+        if (cameraShake == null)
+        {
+            Debug.LogError("CameraShake component is missing.");
+        }
         camColor = GameObject.FindGameObjectWithTag("PosVolum").GetComponent<CamColorChange>();
+        if (camColor == null)
+        {
+            Debug.LogError("CamColorChange component is missing.");
+        }
         rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody2D component is missing.");
+        }
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        if (gameManager == null)
+        {
+            Debug.LogError("GameManager component is missing.");
+        }
 
         SheldPannel = GameObject.FindGameObjectWithTag("SheldP");
-        //Animation
-
-
-
-
+        if (SheldPannel == null)
+        {
+            Debug.LogError("SheldPannel GameObject is missing.");
+        }
         DamegeVFX = GameObject.FindGameObjectWithTag("DamageVFX");
+        if (DamegeVFX == null)
+        {
+            Debug.LogError("DamageVFX GameObject is missing.");
+        }
         dastVFX = GameObject.FindGameObjectWithTag("dastVFX");
+        if (dastVFX == null)
+        {
+            Debug.LogError("DastVFX GameObject is missing.");
+        }
        
-        HelthUpVFX = GameObject.FindGameObjectWithTag("HelthUpVFX");
         endVFX = GameObject.FindGameObjectWithTag("End");
+        if (endVFX == null)
+        {
+            Debug.LogError("End GameObject is missing.");
+        }
         dastVFX.SetActive(false);
         endVFX.SetActive(false);
         DamegeVFX.SetActive(false);
-        
 
         LevelcoinText.text = displayLevelCoin.ToString();
         LevelcoinText2.text = displayLevelCoin.ToString();
-        HelthUpVFX.SetActive(false);
-
-        //animation
        
 
         SheldPannel.SetActive(false);
@@ -142,8 +166,8 @@ public class Swap_Player : MonoBehaviour
         hitCount = 0;
 
         //adsmanage
-       
     }
+
 
 
     // Update is called once per frame
@@ -151,10 +175,13 @@ public class Swap_Player : MonoBehaviour
     void Update()
     {
         // Update the Shield variable in the game manager
-        gameManager.Sheild = Shield;
+        if (gameManager != null)
+        {
+            gameManager.Sheild = Shield;
+        }
 
         // Check if the game is over and the player hasn't won yet
-        if (GameOver && GameWintru == false)
+        if (GameOver && !GameWintru)
         {
             // Reset the hit count and shield
             hitCount = 2;
@@ -162,10 +189,10 @@ public class Swap_Player : MonoBehaviour
 
             // Set the game state to GameOver
             gameState = GameState.GameOver;
-            print("Game Over");
+            Debug.Log("Game Over");
 
             // Play the game over sound if it's not null
-            if (gameoverSound != null)
+            if (gameoverSound != null && audioSource != null)
             {
                 audioSource.PlayOneShot(gameoverSound);
             }
@@ -181,14 +208,26 @@ public class Swap_Player : MonoBehaviour
             rb.velocity = Vector2.zero; // Stop player movement
 
             // Show the damage VFX and shake the camera
-            DamegeVFX.SetActive(true);
-            cameraShake.shakeDuration = 0.7f;
-            cameraShake.ShakeCamera();
-            camColor.ColorAndIntensity();
+            if (DamegeVFX != null)
+            {
+                DamegeVFX.SetActive(true);
+            }
+            if (cameraShake != null)
+            {
+                cameraShake.shakeDuration = 0.7f;
+                cameraShake.ShakeCamera();
+            }
+            if (camColor != null)
+            {
+                camColor.ColorAndIntensity();
+            }
 
             // Set the Interstitial Ads flag to true and hide the menu
             IntasitialAds = true;
-            gameManager.Menu(menu = false);
+            if (gameManager != null)
+            {
+                gameManager.Menu(menu = false);
+            }
 
             // Destroy the player game object after 5 seconds
             Destroy(gameObject, 5f);
@@ -197,7 +236,7 @@ public class Swap_Player : MonoBehaviour
             if (vibrateCounter < vibrateLimit)
             {
                 // Call the Vibrate function from the Vibration class
-                Vibration.Vibrate();
+                Vibration.Vibrate(250);
 
                 // Increment the vibration counter
                 vibrateCounter++;
@@ -216,10 +255,10 @@ public class Swap_Player : MonoBehaviour
             // Reset the level up counter and set the game state to Win
             levelUp = 0;
             gameState = GameState.Win;
-            print("Game Win");
+            Debug.Log("Game Win");
 
             // Play the game win sound if it's not null
-            if (GameWinSound != null)
+            if (GameWinSound != null && audioSource != null)
             {
                 audioSource.PlayOneShot(GameWinSound);
             }
@@ -228,55 +267,77 @@ public class Swap_Player : MonoBehaviour
         // Call the UI and game over count logic functions
         UIandOverCountLogic();
         GameWin();
+    }
 
 
-        //movement add
-       
-    
 
-}//end 
-
-
-// This method handles UI and game over logic
-private void UIandOverCountLogic()
+    // This method handles UI and game over logic
+    private void UIandOverCountLogic()
     {
         if (hitCount == 1)
         {
-            SheldPannel.SetActive(false);
-            Playanim.SetBool("IsSheld", false);
+            if (SheldPannel != null)
+            {
+                SheldPannel.SetActive(false);
+            }
+            if (Playanim != null)
+            {
+                Playanim.SetBool("IsSheld", false);
+            }
             hitCount = 1;
-            
         }
+
         // If the player has no more hits remaining, trigger the game over state
         if (hitCount >= 2)
         {
             GameOver = true;
             hitCount = 2;
-            Destroy(gameObject, 2f);
+            if (gameObject != null)
+            {
+                Destroy(gameObject, 2f);
+            }
         }
-
 
         // Update the number of stars the player has earned based on the level up variable
         switch (levelUp)
         {
             case 3:
-                gameManager.starCount(0);
+                if (gameManager != null)
+                {
+                    gameManager.starCount(0);
+                }
                 break;
             case 2:
-                gameManager.starCount(1);
+                if (gameManager != null)
+                {
+                    gameManager.starCount(1);
+                }
                 break;
             case 1:
-                gameManager.starCount(2);
+                if (gameManager != null)
+                {
+                    gameManager.starCount(2);
+                }
                 break;
             case 0:
-                gameManager.starCount(3);
+                if (gameManager != null)
+                {
+                    gameManager.starCount(3);
+                }
                 break;
         }
 
         // Update the displayed level coin count
-        LevelcoinText2.text = displayLevelCoin.ToString();
-        LevelcoinText.text = displayLevelCoin.ToString();
+        if (LevelcoinText2 != null)
+        {
+            LevelcoinText2.text = displayLevelCoin.ToString();
+        }
+        if (LevelcoinText != null)
+        {
+            LevelcoinText.text = displayLevelCoin.ToString();
+        }
     }
+
 
     private void GameWin()
     {
@@ -322,7 +383,6 @@ private void UIandOverCountLogic()
 
         Vector3 movement = Vector3.zero;
 
-
         if (isMovingRight)
         {
             movement += Vector3.right;
@@ -341,7 +401,6 @@ private void UIandOverCountLogic()
             movement += Vector3.down;
         }
 
-
         if (movement != Vector3.zero)
         {
             // Check if there is an obstacle in the direction of movement
@@ -359,11 +418,27 @@ private void UIandOverCountLogic()
                 isMovingDown = false;
             }
         }
+
+        // Null checks and logic
+        if (isMovingRight || isMovingLeft || isMovingUp || isMovingDown)
+        {
+            if (rb != null)
+            {
+                rb.velocity = Vector2.zero;
+            }
+        }
+        else
+        {
+            if (rb != null)
+            {
+                rb.velocity = new Vector2(0, 0);
+            }
+        }
     }
+
 
     private void FixedUpdate()
    {
-        // thochGet();
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -376,6 +451,7 @@ private void UIandOverCountLogic()
             if (touch.phase == TouchPhase.Ended)
             {
                 fingerUpPosition = touch.position;
+
                 DetectSwipe();
             }
         }
@@ -404,7 +480,6 @@ private void UIandOverCountLogic()
         {
             // Check if there is an obstacle in the direction of movement
             Collider2D obstacle = Physics2D.OverlapCircle(transform.position + movement, offsetinstop, obstacleLayerMask);
-
             if (obstacle == null)
             {
                 transform.Translate(movement * movementSpeed * Time.unscaledDeltaTime);
@@ -416,6 +491,22 @@ private void UIandOverCountLogic()
                 isMovingLeft = false;
                 isMovingUp = false;
                 isMovingDown = false;
+            }
+        }
+
+        // Null checks and logic
+        if (isMovingRight || isMovingLeft || isMovingUp || isMovingDown)
+        {
+            if (rb != null)
+            {
+                rb.velocity = Vector2.zero;
+            }
+        }
+        else
+        {
+            if (rb != null)
+            {
+                rb.velocity = new Vector2(0, 0);
             }
         }
 
@@ -498,7 +589,7 @@ private void UIandOverCountLogic()
             dastVFX.SetActive(true);
            /// rb.velocity = Vector2.zero; // Stop movement when finger is lifted off the screen
             
-            HelthUpVFX.SetActive(false);
+           
             DamegeVFX.SetActive(false);
            
 
@@ -507,7 +598,7 @@ private void UIandOverCountLogic()
             isMovingLeft = false;
             isMovingUp = false;
             isMovingDown = false;
-            print("hit the ground");
+           
         }
 
 
@@ -589,7 +680,7 @@ private void UIandOverCountLogic()
            
             Destroy(collision.gameObject);
 
-            HelthUpVFX.SetActive(true);
+           
            
            
            
