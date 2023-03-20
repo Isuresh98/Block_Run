@@ -82,7 +82,7 @@ public class Swap_Player : MonoBehaviour
 
     void Start()
     {
-        Vibration.Vibrate();
+        
         IntasitialAds = false;
         GameWintru = false;
 
