@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class Swap_Player : MonoBehaviour
 {
     
@@ -96,69 +96,24 @@ public class Swap_Player : MonoBehaviour
 
         //sound effect
         audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
         audioSource.clip = BGSound;
         audioSource.loop = true;
         audioSource.Play();
 
         Playanim = GetComponent<Animator>();
-        if (Playanim == null)
-        {
-            Debug.LogError("Animator component is missing.");
-        }
-        cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
-        if (cameraShake == null)
-        {
-            Debug.LogError("CameraShake component is missing.");
-        }
-        camColor = GameObject.FindGameObjectWithTag("PosVolum").GetComponent<CamColorChange>();
-        if (camColor == null)
-        {
-            Debug.LogError("CamColorChange component is missing.");
-        }
-        rb = GetComponent<Rigidbody2D>();
-        if (rb == null)
-        {
-            Debug.LogError("Rigidbody2D component is missing.");
-        }
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        if (gameManager == null)
-        {
-            Debug.LogError("GameManager component is missing.");
-        }
-
-        SheldPannel = GameObject.FindGameObjectWithTag("SheldP");
-        if (SheldPannel == null)
-        {
-            Debug.LogError("SheldPannel GameObject is missing.");
-        }
+        cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();    
+        camColor = GameObject.FindGameObjectWithTag("PosVolum").GetComponent<CamColorChange>();     
+        rb = GetComponent<Rigidbody2D>();     
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();        
+        SheldPannel = GameObject.FindGameObjectWithTag("SheldP");  
         DamegeVFX = GameObject.FindGameObjectWithTag("DamageVFX");
-        if (DamegeVFX == null)
-        {
-            Debug.LogError("DamageVFX GameObject is missing.");
-        }
         dastVFX = GameObject.FindGameObjectWithTag("dastVFX");
-        if (dastVFX == null)
-        {
-            Debug.LogError("DastVFX GameObject is missing.");
-        }
-       
         endVFX = GameObject.FindGameObjectWithTag("End");
-        if (endVFX == null)
-        {
-            Debug.LogError("End GameObject is missing.");
-        }
         dastVFX.SetActive(false);
         endVFX.SetActive(false);
         DamegeVFX.SetActive(false);
-
         LevelcoinText.text = displayLevelCoin.ToString();
         LevelcoinText2.text = displayLevelCoin.ToString();
-       
-
         SheldPannel.SetActive(false);
         GameOver = false;
 
@@ -175,10 +130,10 @@ public class Swap_Player : MonoBehaviour
     void Update()
     {
         // Update the Shield variable in the game manager
-        if (gameManager != null)
-        {
+       
+        
             gameManager.Sheild = Shield;
-        }
+        
 
         // Check if the game is over and the player hasn't won yet
         if (GameOver && !GameWintru)
@@ -192,10 +147,9 @@ public class Swap_Player : MonoBehaviour
             Debug.Log("Game Over");
 
             // Play the game over sound if it's not null
-            if (gameoverSound != null && audioSource != null)
-            {
+           
                 audioSource.PlayOneShot(gameoverSound);
-            }
+            
         }
 
         // Check if the game state is GameOver
@@ -208,39 +162,30 @@ public class Swap_Player : MonoBehaviour
             rb.velocity = Vector2.zero; // Stop player movement
 
             // Show the damage VFX and shake the camera
-            if (DamegeVFX != null)
-            {
+
                 DamegeVFX.SetActive(true);
-            }
-            if (cameraShake != null)
-            {
+            
+           
                 cameraShake.shakeDuration = 0.7f;
                 cameraShake.ShakeCamera();
-            }
-            if (camColor != null)
-            {
+            
+            
                 camColor.ColorAndIntensity();
-            }
+            
 
             // Set the Interstitial Ads flag to true and hide the menu
             IntasitialAds = true;
-            if (gameManager != null)
-            {
+            
                 gameManager.Menu(menu = false);
-            }
+            
 
             // Destroy the player game object after 5 seconds
             Destroy(gameObject, 5f);
 
             // Check if the vibration limit has been reached
-            if (vibrateCounter < vibrateLimit)
-            {
-                // Call the Vibrate function from the Vibration class
                 Vibration.Vibrate(250);
 
-                // Increment the vibration counter
-                vibrateCounter++;
-            }
+            
         }
 
         // Check if the level up counter has reached 0 and the game has ended
@@ -276,14 +221,12 @@ public class Swap_Player : MonoBehaviour
     {
         if (hitCount == 1)
         {
-            if (SheldPannel != null)
-            {
+           
                 SheldPannel.SetActive(false);
-            }
-            if (Playanim != null)
-            {
+        
+            
                 Playanim.SetBool("IsSheld", false);
-            }
+            
             hitCount = 1;
         }
 
@@ -292,50 +235,33 @@ public class Swap_Player : MonoBehaviour
         {
             GameOver = true;
             hitCount = 2;
-            if (gameObject != null)
-            {
-                Destroy(gameObject, 2f);
-            }
+            Destroy(gameObject, 2f);
+            
         }
 
         // Update the number of stars the player has earned based on the level up variable
         switch (levelUp)
         {
             case 3:
-                if (gameManager != null)
-                {
-                    gameManager.starCount(0);
-                }
+                gameManager.starCount(0);
                 break;
             case 2:
-                if (gameManager != null)
-                {
-                    gameManager.starCount(1);
-                }
+                gameManager.starCount(1);
                 break;
             case 1:
-                if (gameManager != null)
-                {
-                    gameManager.starCount(2);
-                }
+                gameManager.starCount(2);
                 break;
             case 0:
-                if (gameManager != null)
-                {
-                    gameManager.starCount(3);
-                }
+                gameManager.starCount(3);
                 break;
         }
 
         // Update the displayed level coin count
-        if (LevelcoinText2 != null)
-        {
+       
             LevelcoinText2.text = displayLevelCoin.ToString();
-        }
-        if (LevelcoinText != null)
-        {
+        
             LevelcoinText.text = displayLevelCoin.ToString();
-        }
+        
     }
 
 
@@ -419,101 +345,92 @@ public class Swap_Player : MonoBehaviour
             }
         }
 
-        // Null checks and logic
+        // Logic
         if (isMovingRight || isMovingLeft || isMovingUp || isMovingDown)
         {
-            if (rb != null)
-            {
-                rb.velocity = Vector2.zero;
-            }
+            rb.velocity = Vector2.zero;
         }
         else
         {
-            if (rb != null)
-            {
-                rb.velocity = new Vector2(0, 0);
-            }
+            rb.velocity = Vector2.zero;
         }
     }
+
 
 
     private void FixedUpdate()
-   {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Began)
+    {
+        
+        
+            if (Input.touchCount > 0)
             {
-                fingerDownPosition = touch.position;
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Began)
+                {
+                    fingerDownPosition = touch.position;
+                }
+
+                if (touch.phase == TouchPhase.Ended)
+                {
+                    fingerUpPosition = touch.position;
+
+                    DetectSwipe();
+                }
             }
 
-            if (touch.phase == TouchPhase.Ended)
+            Vector3 movement = Vector3.zero;
+
+            if (isMovingRight)
             {
-                fingerUpPosition = touch.position;
-
-                DetectSwipe();
+                movement += Vector3.right;
             }
-        }
-
-        Vector3 movement = Vector3.zero;
-
-        if (isMovingRight)
-        {
-            movement += Vector3.right;
-        }
-        else if (isMovingLeft)
-        {
-            movement += Vector3.left;
-        }
-
-        if (isMovingUp)
-        {
-            movement += Vector3.up;
-        }
-        else if (isMovingDown)
-        {
-            movement += Vector3.down;
-        }
-
-        if (movement != Vector3.zero)
-        {
-            // Check if there is an obstacle in the direction of movement
-            Collider2D obstacle = Physics2D.OverlapCircle(transform.position + movement, offsetinstop, obstacleLayerMask);
-            if (obstacle == null)
+            else if (isMovingLeft)
             {
-                transform.Translate(movement * movementSpeed * Time.unscaledDeltaTime);
+                movement += Vector3.left;
             }
-            else
-            {
-                // Stop moving if there is an obstacle in the way
-                isMovingRight = false;
-                isMovingLeft = false;
-                isMovingUp = false;
-                isMovingDown = false;
-            }
-        }
 
-        // Null checks and logic
-        if (isMovingRight || isMovingLeft || isMovingUp || isMovingDown)
-        {
-            if (rb != null)
+            if (isMovingUp)
+            {
+                movement += Vector3.up;
+            }
+            else if (isMovingDown)
+            {
+                movement += Vector3.down;
+            }
+
+            if (movement != Vector3.zero)
+            {
+                // Check if there is an obstacle in the direction of movement
+                Collider2D obstacle = Physics2D.OverlapCircle(transform.position + movement, offsetinstop, obstacleLayerMask);
+                if (obstacle == null)
+                {
+                    transform.Translate(movement * movementSpeed * Time.unscaledDeltaTime);
+                }
+                else
+                {
+                    // Stop moving if there is an obstacle in the way
+                    isMovingRight = false;
+                    isMovingLeft = false;
+                    isMovingUp = false;
+                    isMovingDown = false;
+                }
+            }
+
+            // Logic
+            if (isMovingRight || isMovingLeft || isMovingUp || isMovingDown)
             {
                 rb.velocity = Vector2.zero;
             }
-        }
-        else
-        {
-            if (rb != null)
+            else
             {
-                rb.velocity = new Vector2(0, 0);
+                rb.velocity = Vector2.zero;
             }
-        }
-
+        
     }
 
 
-    private void DetectSwipe()
+        private void DetectSwipe()
     {
         if (Vector2.Distance(fingerDownPosition, fingerUpPosition) > minDistanceForSwipe)
         {
