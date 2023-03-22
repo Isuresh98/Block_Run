@@ -719,7 +719,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6211\u8981\u5403\u91D1\u8C46"
+  m_Text: Bock run
 --- !u!224 &7096111182786141084
 RectTransform:
   m_ObjectHideFlags: 0
