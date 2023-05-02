@@ -572,7 +572,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &108509306
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1242,6 +1241,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 168492974}
+    - target: {fileID: 6540505810405113848, guid: 818266004b9eddf4ab438d14ba3af980, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6540505811822209988, guid: 818266004b9eddf4ab438d14ba3af980, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1329,14 +1332,6 @@ PrefabInstance:
     - target: {fileID: 6540505811822210040, guid: 818266004b9eddf4ab438d14ba3af980, type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 8085199720104823785, guid: 818266004b9eddf4ab438d14ba3af980, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -164.78662
-      objectReference: {fileID: 0}
-    - target: {fileID: 9096730606213694222, guid: 818266004b9eddf4ab438d14ba3af980, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 818266004b9eddf4ab438d14ba3af980, type: 3}
@@ -2180,7 +2175,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!58 &654637319
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2405,7 +2399,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &729959549
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3651,7 +3644,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &1119668822
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -7806,7 +7798,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1345960206
 GameObject:
   m_ObjectHideFlags: 0
@@ -13598,7 +13589,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!82 &1795706477
 AudioSource:
   m_ObjectHideFlags: 0
@@ -33537,7 +33527,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5357390569198685878
 GameObject:
   m_ObjectHideFlags: 0
